@@ -79,7 +79,8 @@ class _ProfilePageState extends State<ProfilePage> {
               buildAbout(user),
             ],
           ),
-        ));
+        )
+      );
   }
 
   Widget buildName(User user) => Column(

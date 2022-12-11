@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fryo/src/screens/RedeemPage.dart';
 import 'package:fryo/src/screens/HomePage.dart';
+import 'package:fryo/src/screens/RecyclePage.dart';
 import 'package:fryo/src/screens/ProfilePage.dart';
 
 import '../shared/styles.dart';
@@ -343,7 +344,12 @@ Widget headerTopCategories(BuildContext context) {
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           children: <Widget>[
-            headerCategoryItem('Recycle', Fryo.location, onPressed: () {}),
+            headerCategoryItem('Recycle', Fryo.location, onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  RecyclePage()),
+              );
+            }),
             headerCategoryItem('Shopping', Fryo.cart, onPressed: () {}),
             headerCategoryItem('Redeem', Fryo.gift, onPressed: () {
               Navigator.push(
