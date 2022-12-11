@@ -8,9 +8,7 @@ import './SignUpPage.dart';
 import './SignInPage.dart';
 
 class HomePage extends StatefulWidget {
-  final String pageTitle;
-
-  HomePage({Key key, this.pageTitle}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();

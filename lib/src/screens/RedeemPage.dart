@@ -1,31 +1,49 @@
 import 'package:flutter/material.dart';
-import '../shared/Product.dart';
-import '../shared/styles.dart';
 import '../shared/colors.dart';
-import '../shared/partials.dart';
-import '../shared/buttons.dart';
-import '../shared/fryo_icons.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../model/redeemData.dart';
-class RedeemPage extends StatefulWidget {
-  final String pageTitle;
-  final Product productData;
+import '../screens/RedeemPageDetail.dart';
 
-  RedeemPage({Key key, this.pageTitle, this.productData}) : super(key: key);
+class RedeemPage extends StatefulWidget {
+  const RedeemPage({Key? key}) : super(key: key);
 
   @override
   _RedeemPageState createState() => _RedeemPageState();
 }
 
+class Details {
+  static late Fields _test;
+  static Fields get test => _test;
+}
+
+
 class _RedeemPageState extends State<RedeemPage>{
+  late String _image;
+  String _setImage(){
+    Fields currentFields = Details.test;
+    String? _jenis = currentFields.jenisVoucher as String;
+
+    if (_jenis == ""){
+      _image = 'images/belanja.png';
+
+    } else if(_jenis == ""){
+      _image = 'images/pulsa.png';
+
+    } else if (_jenis == ""){
+      _image = 'images/shop.png';
+
+    }
+
+    return _image;
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
-          centerTitle: true,
           elevation: 0,
           backgroundColor: primaryColor,
           actions: <Widget>[
@@ -69,10 +87,20 @@ class _RedeemPageState extends State<RedeemPage>{
                           children: [
                             TextButton(
                               onPressed: () {
+                                Details._test = snapshot.data![index].fields;
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const RedeemPageDetail()),
+                                );
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children:[
+                                  image: new DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: new AssetImage(_setImage());
+
+                                  )
                                   Text(
                                     "${snapshot.data[index].fields.titleVoucher}",
                                     style: const TextStyle(
@@ -100,7 +128,7 @@ class _RedeemPageState extends State<RedeemPage>{
 
   Future<List<RedeemList>> fetchRedeemList() async {
     var url = Uri.parse(
-        'https://proyek-semester-pbp.herokuapp.com/redeem/json/');
+        'https://proyek-semester-pbp.up.railway.app/redeem/json/');
     var response = await http.get(
       url,
       headers: {

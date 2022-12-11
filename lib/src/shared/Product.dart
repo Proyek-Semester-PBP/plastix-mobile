@@ -7,11 +7,11 @@ class Product
   double discount;
 
   Product({
-    this.name,
-    this.price,
-    this.discount,
-    this.image,
-    this.userLiked
+    required this.name,
+    required this.price,
+    required this.discount,
+    required this.image,
+    required this.userLiked
   });
 
 }

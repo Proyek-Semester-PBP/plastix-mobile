@@ -10,13 +10,13 @@ String redeemListToJson(List<RedeemList> data) => json.encode(List<dynamic>.from
 
 class RedeemList {
   RedeemList({
-    this.model,
-    this.pk,
-    this.fields,
+    required this.model,
+    required this.pk,
+    required this.fields,
   });
 
-  Model model;
-  int pk;
+  Model? model;
+  int? pk;
   Fields fields;
 
   factory RedeemList.fromJson(Map<String, dynamic> json) => RedeemList(
@@ -34,19 +34,19 @@ class RedeemList {
 
 class Fields {
   Fields({
-    this.jenisVoucher,
-    this.titleVoucher,
-    this.hargaPoin,
-    this.deskripsi,
+    required this.jenisVoucher,
+    required this.titleVoucher,
+    required this.hargaPoin,
+    required this.deskripsi,
   });
 
-  JenisVoucher jenisVoucher;
+  JenisVoucher? jenisVoucher;
   String titleVoucher;
   int hargaPoin;
   String deskripsi;
 
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
-    jenisVoucher: jenisVoucherValues.map[json["jenis_voucher"]],
+    jenisVoucher: jenisVoucherValues.map[json["jenisVoucher"]],
     titleVoucher: json["title_voucher"],
     hargaPoin: json["harga_poin"],
     deskripsi: json["deskripsi"],
@@ -75,8 +75,8 @@ final modelValues = EnumValues({
 });
 
 class EnumValues<T> {
-  Map<String, T> map;
-  Map<T, String> reverseMap;
+  Map<String, T>  map;
+  late Map<T, String> reverseMap;
 
   EnumValues(this.map);
 

@@ -1,3 +1,6 @@
+// @dart=2.9
+
+
 import 'package:flutter/material.dart';
 import './src/screens/SignInPage.dart';
 import './src/screens/SignUpPage.dart';
@@ -18,12 +21,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: HomePage(pageTitle: 'Welcome'),
+      home: HomePage(),
       routes: <String, WidgetBuilder> {
         '/signup': (BuildContext context) =>  SignUpPage(),
         '/signin': (BuildContext context) =>  SignInPage(),
         '/dashboard': (BuildContext context) => Dashboard(),
-        '/productPage': (BuildContext context) => ProductPage(),
+        // '/productPage': (BuildContext context) => ProductPage(),
       },
     );
   }

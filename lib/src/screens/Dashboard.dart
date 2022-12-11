@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:fryo/src/screens/RedeemPage.dart';
-import 'package:fryo/src/screens/HomePage.dart';
+import 'RedeemPage.dart';
+import 'HomePage.dart';
 
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/fryo_icons.dart';
-import './ProductPage.dart';
 import '../shared/Product.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../shared/partials.dart';
 
 class Dashboard extends StatefulWidget {
-  final String pageTitle;
-
-  Dashboard({Key key, this.pageTitle}) : super(key: key);
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -111,58 +108,58 @@ Widget storeTab(BuildContext context) {
 
   // will pick it up from here
   // am to start another template
-  List<Product> foods = [
-    Product(
-        name: "Hamburger",
-        image: "images/3.png",
-        price: "\$25.00",
-        userLiked: true,
-        discount: 10),
-    Product(
-        name: "Pasta",
-        image: "images/5.png",
-        price: "\$150.00",
-        userLiked: false,
-        discount: 7.8),
-    Product(
-      name: "Akara",
-      image: 'images/2.png',
-      price: '\$10.99',
-      userLiked: false,
-    ),
-    Product(
-        name: "Strawberry",
-        image: "images/1.png",
-        price: '\$50.00',
-        userLiked: true,
-        discount: 14)
-  ];
+  // List<Product> foods = [
+  //   Product(
+  //       name: "Hamburger",
+  //       image: "images/3.png",
+  //       price: "\$25.00",
+  //       userLiked: true,
+  //       discount: 10),
+  //   Product(
+  //       name: "Pasta",
+  //       image: "images/5.png",
+  //       price: "\$150.00",
+  //       userLiked: false,
+  //       discount: 7.8),
+  //   Product(
+  //     name: "Akara",
+  //     image: 'images/2.png',
+  //     price: '\$10.99',
+  //     userLiked: false,
+  //   ),
+  //   Product(
+  //       name: "Strawberry",
+  //       image: "images/1.png",
+  //       price: '\$50.00',
+  //       userLiked: true,
+  //       discount: 14)
+  // ];
 
-  List<Product> drinks = [
-    Product(
-        name: "Coca-Cola",
-        image: "images/6.png",
-        price: "\$45.12",
-        userLiked: true,
-        discount: 2),
-    Product(
-        name: "Lemonade",
-        image: "images/7.png",
-        price: "\$28.00",
-        userLiked: false,
-        discount: 5.2),
-    Product(
-        name: "Vodka",
-        image: "images/8.png",
-        price: "\$78.99",
-        userLiked: false),
-    Product(
-        name: "Tequila",
-        image: "images/9.png",
-        price: "\$168.99",
-        userLiked: true,
-        discount: 3.4)
-  ];
+  // List<Product> drinks = [
+  //   Product(
+  //       name: "Coca-Cola",
+  //       image: "images/6.png",
+  //       price: "\$45.12",
+  //       userLiked: true,
+  //       discount: 2),
+  //   Product(
+  //       name: "Lemonade",
+  //       image: "images/7.png",
+  //       price: "\$28.00",
+  //       userLiked: false,
+  //       discount: 5.2),
+  //   Product(
+  //       name: "Vodka",
+  //       image: "images/8.png",
+  //       price: "\$78.99",
+  //       userLiked: false),
+  //   Product(
+  //       name: "Tequila",
+  //       image: "images/9.png",
+  //       price: "\$168.99",
+  //       userLiked: true,
+  //       discount: 3.4)
+  // ];
 
   return ListView(children: <Widget>[
     headerTopCategories(context),
@@ -236,56 +233,56 @@ Widget storeTab(BuildContext context) {
     }, items: <Widget>[
     ]),
 
-    deals('News', onViewMore: () {}, items: <Widget>[
-      foodItem(drinks[0], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: drinks[0],
-              );
-            },
-          ),
-        );
-      }, onLike: () {}, imgWidth: 60),
-      foodItem(drinks[1], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: drinks[1],
-              );
-            },
-          ),
-        );
-      }, onLike: () {}, imgWidth: 75),
-      foodItem(drinks[2], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: drinks[2],
-              );
-            },
-          ),
-        );
-      }, imgWidth: 110, onLike: () {}),
-      foodItem(drinks[3], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: drinks[3],
-              );
-            },
-          ),
-        );
-      }, onLike: () {}),
-    ])
+    // deals('News', onViewMore: () {}, items: <Widget>[
+    //   // foodItem(drinks[0], onTapped: () {
+    //   //   Navigator.push(
+    //   //     context,
+    //   //     MaterialPageRoute(
+    //   //       builder: (context) {
+    //           // return new ProductPage(
+    //           //   productData: drinks[0],
+    //           // );
+    //         // },
+    //       ),
+    //     );
+      // }, onLike: () {}, imgWidth: 60),
+      // foodItem(drinks[1], onTapped: () {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) {
+      //         return new ProductPage(
+      //           productData: drinks[1],
+      //         );
+      //       },
+      //     ),
+      //   );
+    //   }, onLike: () {}, imgWidth: 75),
+    //   foodItem(drinks[2], onTapped: () {
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(
+    //         builder: (context) {
+    //           return new ProductPage(
+    //             productData: drinks[2],
+    //           );
+    //         },
+    //       ),
+    //     );
+    //   }, imgWidth: 110, onLike: () {}),
+    //   foodItem(drinks[3], onTapped: () {
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(
+    //         builder: (context) {
+    //           return new ProductPage(
+    //             productData: drinks[3],
+    //           );
+    //         },
+    //       ),
+    //     );
+    //   }, onLike: () {}),
+    // ])
   ]);
 }
 
@@ -377,7 +374,7 @@ Widget headerCategoryItem(String name, IconData icon, {onPressed}) {
   );
 }
 
-Widget deals(String dealTitle, {onViewMore, List<Widget> items}) {
+Widget deals(String dealTitle, {onViewMore, required List<Widget> items}) {
   return Container(
     margin: EdgeInsets.only(top: 5),
     child: Column(

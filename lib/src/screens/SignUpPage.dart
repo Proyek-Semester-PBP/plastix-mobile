@@ -8,9 +8,8 @@ import './Dashboard.dart';
 
 
 class SignUpPage extends StatefulWidget {
-  final String pageTitle;
 
-  SignUpPage({Key key, this.pageTitle}) : super(key: key);
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   _SignUpPageState createState() => _SignUpPageState();

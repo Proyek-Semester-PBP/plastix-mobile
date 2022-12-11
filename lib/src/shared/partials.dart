@@ -4,7 +4,7 @@ import '../shared/colors.dart';
 import '../shared/styles.dart';
 
 Widget foodItem(Product food,
-    {double imgWidth, onLike, onTapped, bool isProductPage = false}) {
+    {required double imgWidth, onLike, onTapped, bool isProductPage = false}) {
 
   return Container(
     width: 180,
