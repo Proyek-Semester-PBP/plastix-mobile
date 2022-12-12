@@ -13,17 +13,17 @@ String userDataToJson(List<UserData> data) =>
 
 class UserData {
   UserData({
-    @required this.name,
-    @required this.email,
-    @required this.mobile,
-    @required this.github,
-    @required this.instagram,
-    @required this.twitter,
-    @required this.facebook,
-    @required this.point,
-    @required this.userId,
-    @required this.weight,
-    @required this.profpic,
+    required this.name,
+    required this.email,
+    required this.mobile,
+    required this.github,
+    required this.instagram,
+    required this.twitter,
+    required this.facebook,
+    required this.point,
+    required this.userId,
+    required this.weight,
+    required this.profpic,
   });
 
   String name;

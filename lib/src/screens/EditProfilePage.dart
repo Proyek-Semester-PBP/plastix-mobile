@@ -24,17 +24,17 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   User user = UserPrefrences.myUser;
-  String _name;
-  String _email;
-  String _mobile;
-  String _github;
-  String _instagram;
-  String _twitter;
-  String _facebook;
-  int _point;
-  int _userId;
-  int _weight;
-  String _profpic;
+  late String _name;
+  late String _email;
+  late String _mobile;
+  late String _github;
+  late String _instagram;
+  late String _twitter;
+  late String _facebook;
+  late int _point;
+  late int _userId;
+  late int _weight;
+  late String _profpic;
 
   final myController = TextEditingController();
 
@@ -60,7 +60,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
               Navigator.pushReplacement(
                   context,
                   PageTransition(
-                      type: PageTransitionType.rightToLeft, child: HomePage()));
+                      type: PageTransitionType.rightToLeft,
+                      child: HomePage(
+                        pageTitle: "Plastix",
+                      )));
             },
             iconSize: 21,
             icon: Icon(Fryo.power_swtich),

@@ -18,7 +18,7 @@ import 'dart:async';
 class SignInPage extends StatefulWidget {
   final String pageTitle;
 
-  SignInPage({Key key, this.pageTitle}) : super(key: key);
+  SignInPage({Key? key, required this.pageTitle}) : super(key: key);
 
   @override
   _SignInPageState createState() => _SignInPageState();
@@ -48,7 +48,9 @@ class _SignInPageState extends State<SignInPage> {
                     context,
                     PageTransition(
                         type: PageTransitionType.rightToLeft,
-                        child: SignUpPage()));
+                        child: SignUpPage(
+                          pageTitle: "Plastix",
+                        )));
               },
               child: Text('Sign Up', style: contrastText),
             )
@@ -123,15 +125,16 @@ class _SignInPageState extends State<SignInPage> {
                         try {
                           response = await request.login(
                             'https://proyek-semester-pbp.up.railway.app/auth',
-                            {
-                              'username': username,
-                              'password': password1,
-                            },
+                            jsonEncode({
+                              'username': username.toString(),
+                              'password': password1.toString()
+                            }),
                           );
                         } catch (e) {
                           debugPrint(e.toString());
                         }
                         // debugPrint(response['message'].toString());
+
                         if (request.loggedIn) {
                           // Code here will run if the login succeeded.
                           debugPrint("Sucess");
@@ -143,11 +146,13 @@ class _SignInPageState extends State<SignInPage> {
                               context,
                               PageTransition(
                                   type: PageTransitionType.rightToLeft,
-                                  child: Dashboard()));
+                                  child: Dashboard(
+                                    pageTitle: "Plastix",
+                                  )));
                         } else {
                           // Code here will run if the login failed (wrong username/password).
                           debugPrint("Username or password is incorrect!");
-                          debugPrint(response["message"]);
+                          // debugPrint(response["message"]);
                         }
                       },
                       child: Icon(Icons.arrow_forward, color: darkText),

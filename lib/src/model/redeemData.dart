@@ -8,12 +8,12 @@ String redeemListToJson(List<RedeemList> data) =>
 
 class RedeemList {
   RedeemList({
-    this.model,
-    this.pk,
-    this.fields,
+    required this.model,
+    required this.pk,
+    required this.fields,
   });
 
-  Model model;
+  Model? model;
   int pk;
   Fields fields;
 
@@ -32,13 +32,13 @@ class RedeemList {
 
 class Fields {
   Fields({
-    this.jenisVoucher,
-    this.titleVoucher,
-    this.hargaPoin,
-    this.deskripsi,
+    required this.jenisVoucher,
+    required this.titleVoucher,
+    required this.hargaPoin,
+    required this.deskripsi,
   });
 
-  JenisVoucher jenisVoucher;
+  JenisVoucher? jenisVoucher;
   String titleVoucher;
   int hargaPoin;
   String deskripsi;
@@ -72,7 +72,7 @@ final modelValues = EnumValues({"redeem.voucher": Model.REDEEM_VOUCHER});
 
 class EnumValues<T> {
   Map<String, T> map;
-  Map<T, String> reverseMap;
+  late Map<T, String> reverseMap;
 
   EnumValues(this.map);
 

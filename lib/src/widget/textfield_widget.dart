@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -9,10 +8,10 @@ class TextFieldWidget extends StatefulWidget {
   final ValueChanged<String> onChanged;
 
   const TextFieldWidget({
-    Key key,
-    this.label,
-    this.text,
-    this.onChanged,
+    Key? key,
+    required this.label,
+    required this.text,
+    required this.onChanged,
   }) : super(key: key);
 
   @override

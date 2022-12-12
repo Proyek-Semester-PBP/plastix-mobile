@@ -4,8 +4,7 @@ import '../shared/colors.dart';
 import '../shared/styles.dart';
 
 Widget foodItem(Product food,
-    {double imgWidth, onLike, onTapped, bool isProductPage = false}) {
-
+    {required double imgWidth, onLike, onTapped, bool isProductPage = false}) {
   return Container(
     width: 180,
     height: 180,
@@ -17,12 +16,12 @@ Widget foodItem(Product food,
             width: 180,
             height: 180,
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: white,
-                elevation: (isProductPage) ? 20 : 12,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)),
-              ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: white,
+                  elevation: (isProductPage) ? 20 : 12,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                ),
                 onPressed: onTapped,
                 child: Hero(
                     transitionOnUserGestures: true,

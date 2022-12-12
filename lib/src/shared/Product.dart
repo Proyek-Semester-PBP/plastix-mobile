@@ -1,17 +1,12 @@
-class Product
-{
-  String name,
-        price,
-        image;
+class Product {
+  String name, price, image;
   bool userLiked;
   double discount;
 
-  Product({
-    this.name,
-    this.price,
-    this.discount,
-    this.image,
-    this.userLiked
-  });
-
+  Product(
+      {required this.name,
+      required this.price,
+      required this.discount,
+      required this.image,
+      required this.userLiked});
 }

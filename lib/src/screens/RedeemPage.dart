@@ -8,21 +8,21 @@ import '../shared/fryo_icons.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../model/redeemData.dart';
+
 class RedeemPage extends StatefulWidget {
   final String pageTitle;
   final Product productData;
 
-  RedeemPage({Key key, this.pageTitle, this.productData}) : super(key: key);
+  RedeemPage({Key? key, required this.pageTitle, required this.productData})
+      : super(key: key);
 
   @override
   _RedeemPageState createState() => _RedeemPageState();
 }
 
-class _RedeemPageState extends State<RedeemPage>{
-
+class _RedeemPageState extends State<RedeemPage> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -37,7 +37,6 @@ class _RedeemPageState extends State<RedeemPage>{
             // )
           ],
         ),
-
         body: FutureBuilder(
             future: fetchRedeemList(),
             builder: (context, AsyncSnapshot snapshot) {
@@ -47,60 +46,56 @@ class _RedeemPageState extends State<RedeemPage>{
                 if (!snapshot.hasData) {
                   return Column(
                     children: const [
-                      Text(
-                          "Sorry, right now there isn't voucher available"
-                      ),
+                      Text("Sorry, right now there isn't voucher available"),
                       SizedBox(height: 10),
                     ],
                   );
                 } else {
                   return ListView.builder(
                       itemCount: snapshot.data.length,
-                      itemBuilder: (_, index)=> Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                        padding: const EdgeInsets.all(20.0),
-                        decoration: BoxDecoration(
-                          color:Colors.white,
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                              },
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children:[
-                                  Text(
-                                    "${snapshot.data[index].fields.titleVoucher}",
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 1,
-                                  ),
-                                ],
-                              ),
+                      itemBuilder: (_, index) => Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 12),
+                            padding: const EdgeInsets.all(20.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15.0),
                             ),
-                          ],
-                        ),
-                      )
-                  );
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextButton(
+                                  onPressed: () {},
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Text(
+                                        "${snapshot.data[index].fields.titleVoucher}",
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ));
                 }
               }
-            }
-        )
-    );
+            }));
   }
 
   Future<List<RedeemList>> fetchRedeemList() async {
-    var url = Uri.parse(
-        'https://proyek-semester-pbp.herokuapp.com/redeem/json/');
+    var url =
+        Uri.parse('https://proyek-semester-pbp.herokuapp.com/redeem/json/');
     var response = await http.get(
       url,
       headers: {
@@ -119,4 +114,4 @@ class _RedeemPageState extends State<RedeemPage>{
 
     return listRedeemList;
   }
-  }
+}

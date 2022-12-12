@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fryo/src/shared/Product.dart';
 import 'package:fryo/src/utils/userProvider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -48,10 +49,24 @@ class MyApp extends StatelessWidget {
         ),
         home: HomePage(pageTitle: 'Welcome'),
         routes: <String, WidgetBuilder>{
-          '/signup': (BuildContext context) => SignUpPage(),
-          '/signin': (BuildContext context) => SignInPage(),
-          '/dashboard': (BuildContext context) => Dashboard(),
-          '/productPage': (BuildContext context) => ProductPage(),
+          '/signup': (BuildContext context) => SignUpPage(
+                pageTitle: "Plastix",
+              ),
+          '/signin': (BuildContext context) => SignInPage(
+                pageTitle: "Plastix",
+              ),
+          '/dashboard': (BuildContext context) => Dashboard(
+                pageTitle: "Plastix",
+              ),
+          '/productPage': (BuildContext context) => ProductPage(
+                pageTitle: "Plastix",
+                productData: new Product(
+                    name: "",
+                    price: "",
+                    discount: 0.0,
+                    image: "",
+                    userLiked: false),
+              ),
         },
       ),
     );

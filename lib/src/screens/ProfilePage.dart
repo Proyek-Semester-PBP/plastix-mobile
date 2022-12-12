@@ -27,14 +27,14 @@ import '../model/UserData.dart';
 class ProfilePage extends StatefulWidget {
   final String pageTitle;
 
-  ProfilePage({Key key, this.pageTitle}) : super(key: key);
+  ProfilePage({Key? key, required this.pageTitle}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  Future<List<UserData>> dataFuture;
+  late Future<List<UserData>> dataFuture;
 
   @override
   void initState() {
@@ -89,7 +89,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     context,
                     PageTransition(
                         type: PageTransitionType.rightToLeft,
-                        child: HomePage()));
+                        child: HomePage(
+                          pageTitle: "Plastix",
+                        )));
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),

@@ -6,10 +6,10 @@ class User {
   String github;
 
   User({
-    this.imagePath,
-    this.name,
-    this.email,
-    this.phone,
-    this.github,
+    required this.imagePath,
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.github,
   });
 }

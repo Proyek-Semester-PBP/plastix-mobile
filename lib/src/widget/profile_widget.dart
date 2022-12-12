@@ -8,9 +8,9 @@ class ProfileWidget extends StatelessWidget {
   final bool isEdit;
 
   const ProfileWidget({
-    Key key,
-    this.imagePath,
-    this.onClicked,
+    Key? key,
+    required this.imagePath,
+    required this.onClicked,
     this.isEdit = false,
   }) : super(key: key);
 
@@ -64,9 +64,9 @@ class ProfileWidget extends StatelessWidget {
       );
 
   Widget buildCircle({
-    Widget child,
-    double all,
-    Color color,
+    required Widget child,
+    required double all,
+    required Color color,
   }) =>
       ClipOval(
         child: Container(

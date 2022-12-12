@@ -15,7 +15,7 @@ import '../shared/partials.dart';
 class Dashboard extends StatefulWidget {
   final String pageTitle;
 
-  Dashboard({Key key, this.pageTitle}) : super(key: key);
+  Dashboard({Key? key, required this.pageTitle}) : super(key: key);
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -41,13 +41,19 @@ class _DashboardState extends State<Dashboard> {
           centerTitle: true,
           elevation: 0,
           backgroundColor: primaryColor,
-          title:
-              Text('PlastiX', style: logoWhiteStyle, textAlign: TextAlign.center),
+          title: Text('PlastiX',
+              style: logoWhiteStyle, textAlign: TextAlign.center),
           actions: <Widget>[
             IconButton(
               padding: EdgeInsets.only(),
               onPressed: () {
-                  Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: HomePage()));
+                Navigator.pushReplacement(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.rightToLeft,
+                        child: HomePage(
+                          pageTitle: "Plastix",
+                        )));
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),
@@ -61,10 +67,13 @@ class _DashboardState extends State<Dashboard> {
             IconButton(
               padding: EdgeInsets.all(0),
               onPressed: () {
-                 Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  ProfilePage()),
-                    );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProfilePage(
+                            pageTitle: "Plastix",
+                          )),
+                );
               },
               iconSize: 25,
               icon: Icon(Fryo.user_1),
@@ -75,29 +84,25 @@ class _DashboardState extends State<Dashboard> {
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Fryo.home),
-                label: 'Home',
-
-                ),
+              icon: Icon(Fryo.home),
+              label: 'Home',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Fryo.cart),
-                label:  'Shopping',
-                ),
+              icon: Icon(Fryo.cart),
+              label: 'Shopping',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Fryo.book),
-                label:
-                  'News',
-                ),
+              icon: Icon(Fryo.book),
+              label: 'News',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Fryo.gift),
-                label:
-                  'Redeem',
-                ),
+              icon: Icon(Fryo.gift),
+              label: 'Redeem',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Fryo.location),
-                label:
-                  'Recycle',
-                ),
+              icon: Icon(Fryo.location),
+              label: 'Recycle',
+            ),
           ],
           currentIndex: _selectedIndex,
           type: BottomNavigationBarType.fixed,
@@ -114,7 +119,6 @@ class _DashboardState extends State<Dashboard> {
 }
 
 Widget storeTab(BuildContext context) {
-
   // will pick it up from here
   // am to start another template
   List<Product> foods = [
@@ -135,6 +139,7 @@ Widget storeTab(BuildContext context) {
       image: 'images/2.png',
       price: '\$10.99',
       userLiked: false,
+      discount: 0,
     ),
     Product(
         name: "Strawberry",
@@ -161,7 +166,8 @@ Widget storeTab(BuildContext context) {
         name: "Vodka",
         image: "images/8.png",
         price: "\$78.99",
-        userLiked: false),
+        userLiked: false,
+        discount: 0),
     Product(
         name: "Tequila",
         image: "images/9.png",
@@ -228,20 +234,17 @@ Widget storeTab(BuildContext context) {
       //
       // }),
     ]),
-
-    deals('Shop now!', onViewMore: () {
-
-    }, items: <Widget>[
-    ]),
-
+    deals('Shop now!', onViewMore: () {}, items: <Widget>[]),
     deals('Redeem your point', onViewMore: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) =>  RedeemPage()),
-        );
-    }, items: <Widget>[
-    ]),
-
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => RedeemPage(
+                  pageTitle: "Plastix",
+                  productData: foods[1],
+                )),
+      );
+    }, items: <Widget>[]),
     deals('News', onViewMore: () {}, items: <Widget>[
       foodItem(drinks[0], onTapped: () {
         Navigator.push(
@@ -249,6 +252,7 @@ Widget storeTab(BuildContext context) {
           MaterialPageRoute(
             builder: (context) {
               return new ProductPage(
+                pageTitle: "Plastix",
                 productData: drinks[0],
               );
             },
@@ -261,6 +265,7 @@ Widget storeTab(BuildContext context) {
           MaterialPageRoute(
             builder: (context) {
               return new ProductPage(
+                pageTitle: "Plastix",
                 productData: drinks[1],
               );
             },
@@ -273,6 +278,7 @@ Widget storeTab(BuildContext context) {
           MaterialPageRoute(
             builder: (context) {
               return new ProductPage(
+                pageTitle: "Plastix",
                 productData: drinks[2],
               );
             },
@@ -285,12 +291,13 @@ Widget storeTab(BuildContext context) {
           MaterialPageRoute(
             builder: (context) {
               return new ProductPage(
+                pageTitle: "Plastix",
                 productData: drinks[3],
               );
             },
           ),
         );
-      }, onLike: () {}),
+      }, onLike: () {}, imgWidth: 110),
     ])
   ]);
 }
@@ -330,6 +337,7 @@ Widget secHeader(String headerTitle) {
     ],
   );
 }
+
 // wrap the horizontal listview inside a sizedBox..
 Widget headerTopCategories(BuildContext context) {
   return Column(
@@ -348,7 +356,16 @@ Widget headerTopCategories(BuildContext context) {
             headerCategoryItem('Redeem', Fryo.gift, onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  RedeemPage()),
+                MaterialPageRoute(
+                    builder: (context) => RedeemPage(
+                          pageTitle: "Plastix",
+                          productData: new Product(
+                              name: "",
+                              price: "",
+                              discount: 0.0,
+                              image: "",
+                              userLiked: false),
+                        )),
               );
             }),
             headerCategoryItem('News', Fryo.book, onPressed: () {}),
@@ -383,7 +400,7 @@ Widget headerCategoryItem(String name, IconData icon, {onPressed}) {
   );
 }
 
-Widget deals(String dealTitle, {onViewMore, List<Widget> items}) {
+Widget deals(String dealTitle, {onViewMore, required List<Widget> items}) {
   return Container(
     margin: EdgeInsets.only(top: 5),
     child: Column(
@@ -410,4 +427,3 @@ Widget deals(String dealTitle, {onViewMore, List<Widget> items}) {
     ),
   );
 }
-

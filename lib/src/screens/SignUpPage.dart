@@ -6,11 +6,10 @@ import 'package:page_transition/page_transition.dart';
 import './SignInPage.dart';
 import './Dashboard.dart';
 
-
 class SignUpPage extends StatefulWidget {
   final String pageTitle;
 
-  SignUpPage({Key key, this.pageTitle}) : super(key: key);
+  SignUpPage({Key? key, required this.pageTitle}) : super(key: key);
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -20,66 +19,75 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: white,
-        title: Text('Sign Up',
-            style: TextStyle(
-                color: Colors.grey, fontFamily: 'Poppins', fontSize: 15)),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              // Navigator.of(context).pushReplacementNamed('/signin');
-              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: SignInPage()));
-
-            },
-            child: Text('Sign In', style: contrastText),
-          )
-        ],
-      ),
-      body: ListView(
-        shrinkWrap: true,
-        children: <Widget>[
-          Container(
-        padding: EdgeInsets.only(left: 18, right: 18),
-        child: Stack(
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('Welcome to Plastx!', style: h3),
-                Text('Let\'s get started', style: taglineText),
-                fryoTextInput('Username'),
-                fryoTextInput('Full Name'),
-                fryoEmailInput('Email Address'),
-                fryoPasswordInput('Password')
-              ],
-            ),
-            Positioned(
-              bottom: 15,
-              right: -5,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: primaryColor,
-                  padding: EdgeInsets.all(13),
-                  shape: CircleBorder(),
-                ),
-                onPressed: () {
-                    Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: Dashboard()));
-                },
-                child: Icon(Icons.arrow_forward, color: white),
-              ),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: white,
+          title: Text('Sign Up',
+              style: TextStyle(
+                  color: Colors.grey, fontFamily: 'Poppins', fontSize: 15)),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                // Navigator.of(context).pushReplacementNamed('/signin');
+                Navigator.pushReplacement(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.rightToLeft,
+                        child: SignInPage(
+                          pageTitle: "Plastix",
+                        )));
+              },
+              child: Text('Sign In', style: contrastText),
             )
           ],
         ),
-        height: 360,
-        
-        width: double.infinity,
-        decoration: authPlateDecoration,
-      ),
-        ],
-      )
-    );
+        body: ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(left: 18, right: 18),
+              child: Stack(
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('Welcome to Plastx!', style: h3),
+                      Text('Let\'s get started', style: taglineText),
+                      fryoTextInput('Username'),
+                      fryoTextInput('Full Name'),
+                      fryoEmailInput('Email Address'),
+                      fryoPasswordInput('Password')
+                    ],
+                  ),
+                  Positioned(
+                    bottom: 15,
+                    right: -5,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: primaryColor,
+                        padding: EdgeInsets.all(13),
+                        shape: CircleBorder(),
+                      ),
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: Dashboard(
+                                  pageTitle: "Plastix",
+                                )));
+                      },
+                      child: Icon(Icons.arrow_forward, color: white),
+                    ),
+                  )
+                ],
+              ),
+              height: 360,
+              width: double.infinity,
+              decoration: authPlateDecoration,
+            ),
+          ],
+        ));
   }
 }

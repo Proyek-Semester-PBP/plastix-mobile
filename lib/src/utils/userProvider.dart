@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import '../model/UserData.dart';
 
 class UserProvider with ChangeNotifier {
-  UserProvider({this.userTemp});
+  UserProvider({required this.userTemp});
   UserData userTemp;
 
   UserData get user => userTemp;
