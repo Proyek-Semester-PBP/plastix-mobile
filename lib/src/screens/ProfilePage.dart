@@ -5,10 +5,7 @@ import 'package:fryo/src/screens/HomePage.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/fryo_icons.dart';
-import '../shared/Product.dart';
 // import 'package:page_transition/page_transition.dart';
-
-import '../shared/partials.dart';
 import '../utils/user_prefrences.dart';
 import '../widget/button_widget.dart';
 import '../widget/profile_widget.dart';

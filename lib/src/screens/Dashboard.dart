@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:fryo/src/screens/HomePage.dart';
 import 'package:fryo/recycle/screen/RecyclePage.dart';
 import 'package:fryo/shopping/screens/shopping_page.dart';
+import 'package:fryo/redeem/screens/RedeemPage.dart';
+
 import 'package:fryo/src/screens/ProfilePage.dart';
 
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/fryo_icons.dart';
-import '../shared/Product.dart';
 // import 'package:page_transition/page_transition.dart';
-
-import '../shared/partials.dart';
 
 class Dashboard extends StatefulWidget {
   // final String pageTitle;
@@ -48,8 +47,8 @@ class _DashboardState extends State<Dashboard> {
               padding: EdgeInsets.only(),
               onPressed: () {
                 Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage()),);
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),);
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),
@@ -121,132 +120,30 @@ class _DashboardState extends State<Dashboard> {
 Widget storeTab(BuildContext context) {
   // will pick it up from here
   // am to start another template
-  List<Product> foods = [
-    Product(
-        name: "Hamburger",
-        image: "images/3.png",
-        price: "\$25.00",
-        userLiked: true,
-        discount: 10),
-    Product(
-        name: "Pasta",
-        image: "images/5.png",
-        price: "\$150.00",
-        userLiked: false,
-        discount: 7.8),
-    Product(
-      name: "Akara",
-      image: 'images/2.png',
-      price: '\$10.99',
-      userLiked: false,
-       discount: 7.8
-    ),
-    Product(
-        name: "Strawberry",
-        image: "images/1.png",
-        price: '\$50.00',
-        userLiked: true,
-        discount: 14)
-  ];
 
-  List<Product> drinks = [
-    Product(
-        name: "Coca-Cola",
-        image: "images/6.png",
-        price: "\$45.12",
-        userLiked: true,
-        discount: 2),
-    Product(
-        name: "Lemonade",
-        image: "images/7.png",
-        price: "\$28.00",
-        userLiked: false,
-        discount: 5.2),
-    Product(
-        name: "Vodka",
-        image: "images/8.png",
-        price: "\$78.99",
-        userLiked: false,
-         discount: 7.8),
-    Product(
-        name: "Tequila",
-        image: "images/9.png",
-        price: "\$168.99",
-        userLiked: true,
-        discount: 3.4)
-  ];
 
   return ListView(children: <Widget>[
     headerTopCategories(context),
-    deals('Change your plastic now!', onViewMore: () {}, items: <Widget>[
-      // foodItem(foods[0], onTapped: () {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) {
-      //         return new ProductPage(
-      //           productData: foods[0],
-      //         );
-      //       },
-      //     ),
-      //   );
-      // }, onLike: () {}),
-      // foodItem(foods[1], onTapped: () {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) {
-      //         return new ProductPage(
-      //           productData: foods[1],
-      //         );
-      //       },
-      //     ),
-      //   );
-      // }, imgWidth: 250, onLike: () {
-      //
-      // }),
-      // foodItem(foods[2], onTapped: () {
-      //    Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) {
-      //         return new ProductPage(
-      //           productData: foods[2],
-      //         );
-      //       },
-      //     ),
-      //   );
-      // }, imgWidth: 200, onLike: () {
-      //
-      // }),
-      // foodItem(foods[3], onTapped: () {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) {
-      //         return new ProductPage(
-      //           productData: foods[3],
-      //         );
-      //       },
-      //     ),
-      //   );
-      // }, onLike: () {
-      //
-      // }),
-    ]),
-    deals('Shop now!', onViewMore: () {}, items: <Widget>[]),
-    deals('Redeem your point', onViewMore: () {
-      
+    deals('Change your plastic now!', onViewMore: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => RecyclePage()),
+      );
+    }, items: <Widget>[
+
+    deals('Shop now!', onViewMore: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ShoppingPage()),
+      );
     }, items: <Widget>[]),
-    deals('News', onViewMore: () {}, items: <Widget>[
-      foodItem(drinks[0], onTapped: () {
-      }, onLike: () {}, imgWidth: 60),
-      foodItem(drinks[1], onTapped: () {
-      }, onLike: () {}, imgWidth: 75),
-      foodItem(drinks[2], onTapped: () {
-      }, imgWidth: 110, onLike: () {}),
-      foodItem(drinks[3], onTapped: () {
-      }, onLike: () {}),
+    deals('Redeem your point', onViewMore: () {
+      Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RedeemPage()),
+    );
+
+    }, items: <Widget>[]),
     ])
   ]);
 }
@@ -313,7 +210,11 @@ Widget headerTopCategories(BuildContext context) {
               );
             }),
             headerCategoryItem('Redeem', Fryo.gift, onPressed: () {
-              
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => RedeemPage()),
+              );
+
             }),
             headerCategoryItem('News', Fryo.book, onPressed: () {}),
           ],
@@ -362,12 +263,12 @@ Widget deals(String dealTitle, {onViewMore, List<Widget>? items}) {
             children: (items != null)
                 ? items
                 : <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(left: 15),
-                      child: Text('No items available at this moment.',
-                          style: taglineText),
-                    )
-                  ],
+              Container(
+                margin: EdgeInsets.only(left: 15),
+                child: Text('No items available at this moment.',
+                    style: taglineText),
+              )
+            ],
           ),
         )
       ],

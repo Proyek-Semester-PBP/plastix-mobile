@@ -5,8 +5,9 @@ import '../../src/shared/styles.dart';
 import '../../src/shared/colors.dart';
 import '../../src/shared/fryo_icons.dart';
 // import 'package:page_transition/page_transition.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:fryo/src/screens/HomePage.dart';
-import 'dart:js' as js;
+// import 'dart:js' as js;
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:fryo/src/utils/fetchHistory.dart';
@@ -84,14 +85,15 @@ class _RecyclePageState extends State<RecyclePage> {
         elevation: 0,
         backgroundColor: primaryColor,
         title:
-            Text('Recycle', style: logoWhiteStyle, textAlign: TextAlign.center),
+        Text('Recycle', style: logoWhiteStyle, textAlign: TextAlign.center),
         actions: <Widget>[
           IconButton(
             padding: EdgeInsets.only(),
             onPressed: () {
               Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage()),);
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
             },
             iconSize: 21,
             icon: Icon(Fryo.power_swtich),
@@ -127,7 +129,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[0].name,
                       textAlign: TextAlign.center,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -139,8 +141,13 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     IconButton(
                       splashRadius: 10.0,
-                      onPressed: () {
-                        js.context.callMethod('open', [locations[0].link]);
+                      onPressed: () async {
+                        var url = Uri.parse(locations[0].link);
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
                       },
                       icon: Image.asset(
                         locations[0]
@@ -157,7 +164,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[1].name,
                       textAlign: TextAlign.center,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -169,8 +176,13 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     IconButton(
                       splashRadius: 10.0,
-                      onPressed: () {
-                        js.context.callMethod('open', [locations[1].link]);
+                      onPressed: () async {
+                        var url = Uri.parse(locations[1].link);
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
                       },
                       icon: Image.asset(
                         locations[1]
@@ -187,7 +199,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[2].name,
                       textAlign: TextAlign.center,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -199,8 +211,13 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     IconButton(
                       splashRadius: 10.0,
-                      onPressed: () {
-                        js.context.callMethod('open', [locations[2].link]);
+                      onPressed: () async {
+                        var url = Uri.parse(locations[2].link);
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
                       },
                       icon: Image.asset(
                         locations[2]
@@ -217,7 +234,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[3].name,
                       textAlign: TextAlign.center,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -229,8 +246,13 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     IconButton(
                       splashRadius: 10.0,
-                      onPressed: () {
-                        js.context.callMethod('open', [locations[3].link]);
+                      onPressed: () async {
+                        var url = Uri.parse(locations[3].link);
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
                       },
                       icon: Image.asset(
                         locations[3]
@@ -247,7 +269,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[4].name,
                       textAlign: TextAlign.center,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -259,8 +281,13 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     IconButton(
                       splashRadius: 10.0,
-                      onPressed: () {
-                        js.context.callMethod('open', [locations[4].link]);
+                      onPressed: () async {
+                        var url = Uri.parse(locations[4].link);
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
                       },
                       icon: Image.asset(
                         locations[4]
@@ -277,7 +304,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[5].name,
                       textAlign: TextAlign.center,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -289,8 +316,13 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     IconButton(
                       splashRadius: 10.0,
-                      onPressed: () {
-                        js.context.callMethod('open', [locations[5].link]);
+                      onPressed: () async {
+                        var url = Uri.parse(locations[5].link);
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
                       },
                       icon: Image.asset(
                         locations[5]
@@ -307,7 +339,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[6].name,
                       textAlign: TextAlign.center,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -319,8 +351,13 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     IconButton(
                       splashRadius: 10.0,
-                      onPressed: () {
-                        js.context.callMethod('open', [locations[6].link]);
+                      onPressed: () async {
+                        var url = Uri.parse(locations[6].link);
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
                       },
                       icon: Image.asset(
                         locations[6]
@@ -337,7 +374,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[7].name,
                       textAlign: TextAlign.center,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -349,8 +386,13 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     IconButton(
                       splashRadius: 10.0,
-                      onPressed: () {
-                        js.context.callMethod('open', [locations[7].link]);
+                      onPressed: () async {
+                        var url = Uri.parse(locations[7].link);
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
                       },
                       icon: Image.asset(
                         locations[7]
@@ -365,21 +407,24 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     Align(
                         child: SizedBox(
-                      width: 370,
-                      height: 40,
-                      child: FloatingActionButton(
-                          shape: (RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                          backgroundColor: Color(0xFF198754),
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => FormDropoff()),);
-                          },
-                          child: Text(
-                            "Click here when you're at our vending machine",
-                          )),
-                    )),
+                          width: 370,
+                          height: 40,
+                          child: FloatingActionButton(
+                              heroTag: null,
+                              shape: (RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                              backgroundColor: Color(0xFF198754),
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => FormDropoff()),
+                                );
+                              },
+                              child: Text(
+                                "Click here when you're at our vending machine",
+                              )),
+                        )),
                     Container(
                       margin: EdgeInsets.all(10.0),
                     ),
@@ -412,21 +457,23 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     Align(
                         child: SizedBox(
-                      width: 70,
-                      height: 40,
-                      child: FloatingActionButton(
-                          shape: (RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                          backgroundColor: Color(0xFF198754),
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => FormPickup()),);
-                          },
-                          child: Text(
-                            "Pick Up",
-                          )),
-                    )),
+                          width: 70,
+                          height: 40,
+                          child: FloatingActionButton(
+                              shape: (RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                              backgroundColor: Color(0xFF198754),
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => FormPickup()),
+                                );
+                              },
+                              child: Text(
+                                "Pick Up",
+                              )),
+                        )),
                     Container(
                       margin: EdgeInsets.all(10.0),
                     ),
@@ -465,7 +512,7 @@ class _RecyclePageState extends State<RecyclePage> {
                               TableRow(
                                   decoration: BoxDecoration(
                                       color:
-                                          Color.fromARGB(255, 205, 241, 197)),
+                                      Color.fromARGB(255, 205, 241, 197)),
                                   children: [
                                     Text('Name',
                                         style: TextStyle(
@@ -492,7 +539,7 @@ class _RecyclePageState extends State<RecyclePage> {
                                 return TableRow(
                                     decoration: BoxDecoration(
                                         color:
-                                            Color.fromARGB(255, 205, 241, 197)),
+                                        Color.fromARGB(255, 205, 241, 197)),
                                     children: [
                                       Text(history.fields.name,
                                           textAlign: TextAlign.center),
