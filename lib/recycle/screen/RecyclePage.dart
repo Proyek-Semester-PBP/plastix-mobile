@@ -92,7 +92,11 @@ class _RecyclePageState extends State<RecyclePage> {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
+<<<<<<< HEAD
                 MaterialPageRoute(builder: (context) => HomePage(pageTitle: '',)),
+=======
+                MaterialPageRoute(builder: (context) => HomePage()),
+>>>>>>> 7d96a0be40af8525992333a0d123d8f0a3a20bf1
               );
             },
             iconSize: 21,
@@ -407,6 +411,7 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     Align(
                         child: SizedBox(
+<<<<<<< HEAD
                           width: 370,
                           height: 40,
                           child: FloatingActionButton(
@@ -425,6 +430,26 @@ class _RecyclePageState extends State<RecyclePage> {
                                 "Click here when you're at our vending machine",
                               )),
                         )),
+=======
+                      width: 370,
+                      height: 40,
+                      child: FloatingActionButton(
+                          heroTag: null,
+                          shape: (RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                          backgroundColor: Color(0xFF198754),
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FormDropoff()),
+                            );
+                          },
+                          child: Text(
+                            "Click here when you're at our vending machine",
+                          )),
+                    )),
+>>>>>>> 7d96a0be40af8525992333a0d123d8f0a3a20bf1
                     Container(
                       margin: EdgeInsets.all(10.0),
                     ),
@@ -457,6 +482,7 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     Align(
                         child: SizedBox(
+<<<<<<< HEAD
                           width: 70,
                           height: 40,
                           child: FloatingActionButton(
@@ -474,6 +500,25 @@ class _RecyclePageState extends State<RecyclePage> {
                                 "Pick Up",
                               )),
                         )),
+=======
+                      width: 70,
+                      height: 40,
+                      child: FloatingActionButton(
+                          shape: (RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                          backgroundColor: Color(0xFF198754),
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FormPickup()),
+                            );
+                          },
+                          child: Text(
+                            "Pick Up",
+                          )),
+                    )),
+>>>>>>> 7d96a0be40af8525992333a0d123d8f0a3a20bf1
                     Container(
                       margin: EdgeInsets.all(10.0),
                     ),
