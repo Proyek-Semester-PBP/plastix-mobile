@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'FetchData.dart';
+import 'fetch_data.dart';
 
 class NewsPage extends StatefulWidget {
   const NewsPage({super.key});
