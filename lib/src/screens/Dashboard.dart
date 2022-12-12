@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:fryo/src/screens/RedeemPage.dart';
 import 'package:fryo/src/screens/HomePage.dart';
-import 'package:fryo/src/screens/RecyclePage.dart';
+import 'package:fryo/recycle/screen/RecyclePage.dart';
+import 'package:fryo/shopping/screens/shopping_page.dart';
 import 'package:fryo/src/screens/ProfilePage.dart';
 
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/fryo_icons.dart';
-import './ProductPage.dart';
 import '../shared/Product.dart';
-import 'package:page_transition/page_transition.dart';
+// import 'package:page_transition/page_transition.dart';
 
 import '../shared/partials.dart';
 
 class Dashboard extends StatefulWidget {
-  final String pageTitle;
+  // final String pageTitle;
 
-  Dashboard({Key key, this.pageTitle}) : super(key: key);
+  Dashboard({Key? key}) : super(key: key);
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -50,9 +49,7 @@ class _DashboardState extends State<Dashboard> {
               onPressed: () {
                 Navigator.pushReplacement(
                     context,
-                    PageTransition(
-                        type: PageTransitionType.rightToLeft,
-                        child: HomePage()));
+                    MaterialPageRoute(builder: (context) => HomePage()),);
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),
@@ -142,6 +139,7 @@ Widget storeTab(BuildContext context) {
       image: 'images/2.png',
       price: '\$10.99',
       userLiked: false,
+       discount: 7.8
     ),
     Product(
         name: "Strawberry",
@@ -168,7 +166,8 @@ Widget storeTab(BuildContext context) {
         name: "Vodka",
         image: "images/8.png",
         price: "\$78.99",
-        userLiked: false),
+        userLiked: false,
+         discount: 7.8),
     Product(
         name: "Tequila",
         image: "images/9.png",
@@ -237,59 +236,16 @@ Widget storeTab(BuildContext context) {
     ]),
     deals('Shop now!', onViewMore: () {}, items: <Widget>[]),
     deals('Redeem your point', onViewMore: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => RedeemPage()),
-      );
+      
     }, items: <Widget>[]),
     deals('News', onViewMore: () {}, items: <Widget>[
       foodItem(drinks[0], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: drinks[0],
-              );
-            },
-          ),
-        );
       }, onLike: () {}, imgWidth: 60),
       foodItem(drinks[1], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: drinks[1],
-              );
-            },
-          ),
-        );
       }, onLike: () {}, imgWidth: 75),
       foodItem(drinks[2], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: drinks[2],
-              );
-            },
-          ),
-        );
       }, imgWidth: 110, onLike: () {}),
       foodItem(drinks[3], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: drinks[3],
-              );
-            },
-          ),
-        );
       }, onLike: () {}),
     ])
   ]);
@@ -350,12 +306,14 @@ Widget headerTopCategories(BuildContext context) {
                 MaterialPageRoute(builder: (context) => RecyclePage()),
               );
             }),
-            headerCategoryItem('Shopping', Fryo.cart, onPressed: () {}),
-            headerCategoryItem('Redeem', Fryo.gift, onPressed: () {
+            headerCategoryItem('Shopping', Fryo.cart, onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => RedeemPage()),
+                MaterialPageRoute(builder: (context) => ShoppingPage()),
               );
+            }),
+            headerCategoryItem('Redeem', Fryo.gift, onPressed: () {
+              
             }),
             headerCategoryItem('News', Fryo.book, onPressed: () {}),
           ],
@@ -389,7 +347,7 @@ Widget headerCategoryItem(String name, IconData icon, {onPressed}) {
   );
 }
 
-Widget deals(String dealTitle, {onViewMore, List<Widget> items}) {
+Widget deals(String dealTitle, {onViewMore, List<Widget>? items}) {
   return Container(
     margin: EdgeInsets.only(top: 5),
     child: Column(

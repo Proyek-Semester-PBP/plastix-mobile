@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/inputFields.dart';
-import 'package:page_transition/page_transition.dart';
+// import 'package:page_transition/page_transition.dart';
 import './SignInPage.dart';
 import './Dashboard.dart';
 
 
 class SignUpPage extends StatefulWidget {
-  final String pageTitle;
+  // final String pageTitle;
 
-  SignUpPage({Key key, this.pageTitle}) : super(key: key);
+  SignUpPage({Key? key}) : super(key: key);
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -30,7 +30,9 @@ class _SignUpPageState extends State<SignUpPage> {
           TextButton(
             onPressed: () {
               // Navigator.of(context).pushReplacementNamed('/signin');
-              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: SignInPage()));
+              Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignInPage()),);
 
             },
             child: Text('Sign In', style: contrastText),
@@ -66,7 +68,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   shape: CircleBorder(),
                 ),
                 onPressed: () {
-                    Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: Dashboard()));
+                    Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => Dashboard()),);
                 },
                 child: Icon(Icons.arrow_forward, color: white),
               ),

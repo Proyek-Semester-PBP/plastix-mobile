@@ -3,7 +3,6 @@ import './src/screens/SignInPage.dart';
 import './src/screens/SignUpPage.dart';
 import './src/screens/HomePage.dart';
 import './src/screens/Dashboard.dart';
-import './src/screens/ProductPage.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -24,12 +23,11 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.green,
             dividerColor: Colors.black,
           ),
-          home: HomePage(pageTitle: 'Welcome'),
+          home: HomePage(),
           routes: <String, WidgetBuilder>{
             '/signup': (BuildContext context) => SignUpPage(),
             '/signin': (BuildContext context) => SignInPage(),
             '/dashboard': (BuildContext context) => Dashboard(),
-            '/productPage': (BuildContext context) => ProductPage(),
           },
         ));
   }

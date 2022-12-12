@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fryo/src/screens/FormPickup.dart';
-import 'package:fryo/src/screens/FormDropoff.dart';
-import '../shared/styles.dart';
-import '../shared/colors.dart';
-import '../shared/fryo_icons.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:fryo/recycle/screen/FormPickup.dart';
+import 'package:fryo/recycle/screen/FormDropoff.dart';
+import '../../src/shared/styles.dart';
+import '../../src/shared/colors.dart';
+import '../../src/shared/fryo_icons.dart';
+// import 'package:page_transition/page_transition.dart';
 import 'package:fryo/src/screens/HomePage.dart';
 import 'dart:js' as js;
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -12,10 +12,10 @@ import 'package:provider/provider.dart';
 import 'package:fryo/src/utils/fetchHistory.dart';
 
 class RecyclePage extends StatefulWidget {
-  final String pageTitle;
+  // final String pageTitle;
   // WebViewXController webviewController;
 
-  RecyclePage({Key key, this.pageTitle}) : super(key: key);
+  RecyclePage({Key? key}) : super(key: key);
 
   @override
   _RecyclePageState createState() => _RecyclePageState();
@@ -90,9 +90,8 @@ class _RecyclePageState extends State<RecyclePage> {
             padding: EdgeInsets.only(),
             onPressed: () {
               Navigator.pushReplacement(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.rightToLeft, child: HomePage()));
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),);
             },
             iconSize: 21,
             icon: Icon(Fryo.power_swtich),
@@ -374,10 +373,8 @@ class _RecyclePageState extends State<RecyclePage> {
                           backgroundColor: Color(0xFF198754),
                           onPressed: () {
                             Navigator.pushReplacement(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.rightToLeft,
-                                    child: FormDropoff()));
+                    context,
+                    MaterialPageRoute(builder: (context) => FormDropoff()),);
                           },
                           child: Text(
                             "Click here when you're at our vending machine",
@@ -423,10 +420,8 @@ class _RecyclePageState extends State<RecyclePage> {
                           backgroundColor: Color(0xFF198754),
                           onPressed: () {
                             Navigator.pushReplacement(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.rightToLeft,
-                                    child: FormPickup()));
+                    context,
+                    MaterialPageRoute(builder: (context) => FormPickup()),);
                           },
                           child: Text(
                             "Pick Up",
@@ -555,9 +550,9 @@ class Location {
   String name, detail, image, link;
 
   Location({
-    this.name,
-    this.detail,
-    this.image,
-    this.link,
+    required this.name,
+    required this.detail,
+    required this.image,
+    required this.link,
   });
 }

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:fryo/src/screens/RedeemPage.dart';
 import 'package:fryo/src/screens/HomePage.dart';
 
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/fryo_icons.dart';
-import './ProductPage.dart';
 import '../shared/Product.dart';
-import 'package:page_transition/page_transition.dart';
+// import 'package:page_transition/page_transition.dart';
 
 import '../shared/partials.dart';
 import '../utils/user_prefrences.dart';
@@ -18,9 +16,9 @@ import '../widget/number_widget.dart';
 import '../model/user.dart';
 
 class ProfilePage extends StatefulWidget {
-  final String pageTitle;
+  // final String pageTitle;
 
-  ProfilePage({Key key, this.pageTitle}) : super(key: key);
+  ProfilePage({Key? key}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -45,9 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () {
                 Navigator.pushReplacement(
                     context,
-                    PageTransition(
-                        type: PageTransitionType.rightToLeft,
-                        child: HomePage()));
+                    MaterialPageRoute(builder: (context) => HomePage()),);
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),

@@ -7,9 +7,9 @@ class ProfileWidget extends StatelessWidget {
   final VoidCallback onClicked;
 
   const ProfileWidget({
-    Key key,
-    this.imagePath,
-    this.onClicked,
+    Key? key,
+    required this.imagePath,
+    required this.onClicked,
   }) : super(key: key);
 
   @override
@@ -62,13 +62,13 @@ class ProfileWidget extends StatelessWidget {
       );
 
   Widget buildCircle({
-    Widget child,
-    double all,
-    Color color,
+    Widget? child,
+    double? all,
+    Color? color,
   }) =>
       ClipOval(
         child: Container(
-          padding: EdgeInsets.all(all),
+          padding: EdgeInsets.all(10),
           color: color,
           child: child,
         ),

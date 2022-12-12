@@ -9,9 +9,9 @@ String historyToJson(List<RecycleHistory> data) =>
 
 class RecycleHistory {
   RecycleHistory({
-    this.model,
-    this.pk,
-    this.fields,
+    required this.model,
+    required this.pk,
+    required this.fields,
   });
 
   String model;
@@ -33,14 +33,14 @@ class RecycleHistory {
 
 class Fields {
   Fields({
-    this.user,
-    this.name,
-    this.date,
-    this.weight,
-    this.point,
-    this.location,
-    this.is_pickup,
-    this.description,
+    required this.user,
+    required this.name,
+    required this.date,
+    required this.weight,
+    required this.point,
+    required this.location,
+    required this.is_pickup,
+    required this.description,
   });
 
   User user;

@@ -1,4 +1,4 @@
-import 'package:fryo/src/model/recycleHistory.dart';
+import 'package:fryo/recycle/model/recycleHistory.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';

@@ -1,35 +1,30 @@
 import 'package:flutter/material.dart';
-import '../shared/styles.dart';
-import '../shared/colors.dart';
-import '../shared/fryo_icons.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:fryo/src/screens/RecyclePage.dart';
+import '../../src/shared/styles.dart';
+import '../../src/shared/colors.dart';
+import '../../src/shared/fryo_icons.dart';
+// import 'package:page_transition/page_transition.dart';
+import 'package:fryo/recycle/screen/RecyclePage.dart';
 import 'package:fryo/src/screens/HomePage.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
-class FormPickup extends StatefulWidget {
-  final String pageTitle;
+class FormDropoff extends StatefulWidget {
+  // final String pageTitle;
 
-  FormPickup({Key key, this.pageTitle}) : super(key: key);
+  FormDropoff({Key? key}) : super(key: key);
 
   @override
-  _FormPickupState createState() => _FormPickupState();
+  _FormDropoffState createState() => _FormDropoffState();
 }
 
-class _FormPickupState extends State<FormPickup> {
+class _FormDropoffState extends State<FormDropoff> {
   final _formKey = GlobalKey<FormState>();
+
   String _name = "";
   int _weight = 0;
-  String _region = "";
-  String _city = "";
-  String _subdistrict = "";
-  int _zipcode = 0;
-  String _details = "";
-  String _description = "";
   String _location = "";
-  DateTime _date;
-  bool _is_pickup = true;
+  String _description = "";
+  bool _is_pickup = false;
 
   void post_history(
       request, name, weight, description, is_pickup, location) async {
@@ -54,7 +49,7 @@ class _FormPickupState extends State<FormPickup> {
           centerTitle: true,
           elevation: 0,
           backgroundColor: primaryColor,
-          title: Text('Pick Up Form',
+          title: Text('Drop Off Form',
               style: logoWhiteStyle, textAlign: TextAlign.center),
           actions: <Widget>[
             IconButton(
@@ -62,9 +57,7 @@ class _FormPickupState extends State<FormPickup> {
               onPressed: () {
                 Navigator.pushReplacement(
                     context,
-                    PageTransition(
-                        type: PageTransitionType.rightToLeft,
-                        child: HomePage()));
+                    MaterialPageRoute(builder: (context) => HomePage()),);
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),
@@ -98,12 +91,12 @@ class _FormPickupState extends State<FormPickup> {
                                     _name = value;
                                   });
                                 },
-                                onSaved: (String value) {
+                                onSaved: (String? value) {
                                   setState(() {
-                                    _name = value;
+                                    _name = value!;
                                   });
                                 },
-                                validator: (String value) {
+                                validator: (String? value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Name is required!';
                                   }
@@ -126,12 +119,12 @@ class _FormPickupState extends State<FormPickup> {
                                     _weight = int.parse(value);
                                   });
                                 },
-                                onSaved: (String value) {
+                                onSaved: (String? value) {
                                   setState(() {
-                                    _weight = int.parse(value);
+                                    _weight = int.parse(value!);
                                   });
                                 },
-                                validator: (String value) {
+                                validator: (String? value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Weight is required!';
                                   } else if (int.tryParse(value) == null) {
@@ -143,150 +136,7 @@ class _FormPickupState extends State<FormPickup> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  top: 7, right: 30, left: 30, bottom: 7),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: "Region (ex: Jawa Barat)",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                  ),
-                                ),
-                                onChanged: (String value) {
-                                  setState(() {
-                                    _region = value;
-                                  });
-                                },
-                                onSaved: (String value) {
-                                  setState(() {
-                                    _region = value;
-                                  });
-                                },
-                                validator: (String value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Region is required!';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 7, right: 30, left: 30, bottom: 7),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: "City (ex: Bogor)",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                  ),
-                                ),
-                                onChanged: (String value) {
-                                  setState(() {
-                                    _city = value;
-                                  });
-                                },
-                                onSaved: (String value) {
-                                  setState(() {
-                                    _city = value;
-                                  });
-                                },
-                                validator: (String value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'City is required!';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 7, right: 30, left: 30, bottom: 7),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: "Subdistrict (ex: Cileungsi)",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                  ),
-                                ),
-                                onChanged: (String value) {
-                                  setState(() {
-                                    _subdistrict = value;
-                                  });
-                                },
-                                onSaved: (String value) {
-                                  setState(() {
-                                    _subdistrict = value;
-                                  });
-                                },
-                                validator: (String value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Subdistrict is required!';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 7, right: 30, left: 30, bottom: 7),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: "ZIP Code (ex: 12345)",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                  ),
-                                ),
-                                onChanged: (String value) {
-                                  setState(() {
-                                    _zipcode = int.parse(value);
-                                  });
-                                },
-                                onSaved: (String value) {
-                                  setState(() {
-                                    _zipcode = int.parse(value);
-                                  });
-                                },
-                                validator: (String value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'ZIP Code is required!';
-                                  } else if (int.tryParse(value) == null) {
-                                    return 'ZIP Code should be numeric!';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 7, right: 30, left: 30, bottom: 7),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText:
-                                      "Details (Street Name, Building Number)",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                  ),
-                                ),
-                                onChanged: (String value) {
-                                  setState(() {
-                                    _details = value;
-                                  });
-                                },
-                                onSaved: (String value) {
-                                  setState(() {
-                                    _details = value;
-                                  });
-                                },
-                                validator: (String value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Details is required!';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 7, right: 30, left: 30, bottom: 30),
+                                  top: 7, right: 30, left: 30, bottom: 20),
                               child: TextFormField(
                                 decoration: InputDecoration(
                                   hintText:
@@ -300,11 +150,130 @@ class _FormPickupState extends State<FormPickup> {
                                     _description = value;
                                   });
                                 },
-                                onSaved: (String value) {
+                                onSaved: (String? value) {
                                   setState(() {
-                                    _description = value;
+                                    _description = value!;
                                   });
                                 },
+                              ),
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(left: 20),
+                                child: ListTile(
+                                  title: const Text('AEON Serpong'),
+                                  leading: Radio(
+                                    value: "AEON Serpong",
+                                    groupValue: _location,
+                                    onChanged: (String? value) {
+                                      setState(() {
+                                        _location = value!;
+                                      });
+                                    },
+                                  ),
+                                )),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: ListTile(
+                                title: const Text('Botani Square'),
+                                leading: Radio(
+                                  value: "Botani Square",
+                                  groupValue: _location,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _location = value!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: ListTile(
+                                title: const Text('Kota Kasablanka'),
+                                leading: Radio(
+                                  value: "Kota Kasablanka",
+                                  groupValue: _location,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _location = value!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: ListTile(
+                                title: const Text('Margocity Depok'),
+                                leading: Radio(
+                                  value: "Margocity Depok",
+                                  groupValue: _location,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _location = value!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: ListTile(
+                                title: const Text('Paris Van Java'),
+                                leading: Radio(
+                                  value: "Paris Van Java",
+                                  groupValue: _location,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _location = value!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: ListTile(
+                                title: const Text('Plaza Indonesia'),
+                                leading: Radio(
+                                  value: "Plaza Indonesia",
+                                  groupValue: _location,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _location = value!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: ListTile(
+                                title: const Text('Senayan City'),
+                                leading: Radio(
+                                  value: "Senayan City",
+                                  groupValue: _location,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _location = value!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: ListTile(
+                                title: const Text('Summarecon Bekasi'),
+                                leading: Radio(
+                                  value: "Summarecon Bekasi",
+                                  groupValue: _location,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _location = value!;
+                                    });
+                                  },
+                                ),
                               ),
                             ),
                             Container(
@@ -319,22 +288,12 @@ class _FormPickupState extends State<FormPickup> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  if (_formKey.currentState.validate()) {
-                                    _formKey.currentState.save();
+                                  if (_formKey.currentState!.validate()) {
+                                    _formKey.currentState!.save();
                                     setState(() {
-                                      _location = _details +
-                                          ", " +
-                                          _subdistrict +
-                                          ", " +
-                                          _city +
-                                          ", " +
-                                          _region +
-                                          " - " +
-                                          _zipcode.toString();
+                                      // _date = DateTime.now();
                                       // post_history(request, _name, _weight,
                                       //     _description, _is_pickup, _location);
-                                      // Budget newBudget = Budget(_judul, _nominal, _jenis, tanggal);
-                                      // DataBudget.data.add(newBudget);
                                     });
                                     showDialog(
                                       context: context,
@@ -365,7 +324,11 @@ class _FormPickupState extends State<FormPickup> {
                                                             FontWeight.bold,
                                                       ),
                                                     ),
-                                                    // Text(_location +
+                                                    // Text(_name +
+                                                    //     " " +
+                                                    //     _weight.toString() +
+                                                    //     " " +
+                                                    //     _location +
                                                     //     " " +
                                                     //     _description +
                                                     //     " " +
@@ -380,13 +343,8 @@ class _FormPickupState extends State<FormPickup> {
                                                     setState(() {
                                                       _name = "";
                                                       _weight = 0;
-                                                      _region = "";
-                                                      _city = "";
-                                                      _subdistrict = "";
-                                                      _zipcode = 0;
-                                                      _details = "";
-                                                      _description = "";
                                                       _location = "";
+                                                      _description = "";
                                                     });
                                                   },
                                                 ),
