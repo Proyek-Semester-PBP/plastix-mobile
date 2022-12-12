@@ -57,7 +57,7 @@ class _FormDropoffState extends State<FormDropoff> {
               onPressed: () {
                 Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),);
+                    MaterialPageRoute(builder: (context) => HomePage(pageTitle: '',)),);
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),

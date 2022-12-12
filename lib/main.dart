@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.green,
             dividerColor: Colors.black,
           ),
-          home: HomePage(),
+          home: HomePage(pageTitle: '',),
           routes: <String, WidgetBuilder>{
             '/signup': (BuildContext context) => SignUpPage(),
             '/signin': (BuildContext context) => SignInPage(),

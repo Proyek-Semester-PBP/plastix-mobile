@@ -3,6 +3,7 @@ import 'package:fryo/src/screens/HomePage.dart';
 import 'package:fryo/recycle/screen/RecyclePage.dart';
 import 'package:fryo/shopping/screens/shopping_page.dart';
 import 'package:fryo/redeem/screens/RedeemPage.dart';
+import 'package:fryo/news/screens/NewsPage.dart';
 
 import 'package:fryo/src/screens/ProfilePage.dart';
 
@@ -29,7 +30,6 @@ class _DashboardState extends State<Dashboard> {
       storeTab(context),
       Text('Tab2'),
       Text('Tab3'),
-      // RedeemPage(context).
       Text('Tab5'),
       Text('Tab6'),
     ];
@@ -48,7 +48,7 @@ class _DashboardState extends State<Dashboard> {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage()),);
+                  MaterialPageRoute(builder: (context) => HomePage(pageTitle: '',)),);
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),
@@ -104,7 +104,24 @@ class _DashboardState extends State<Dashboard> {
   }
 
   void _onItemTapped(int index) {
-    if (index == 4) {
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ShoppingPage()),
+      );
+    } else if (index == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => NewsPage()),
+      );
+
+    } else if (index == 3) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => RedeemPage()),
+      );
+
+    } else if (index == 4) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => RecyclePage()),
@@ -129,22 +146,58 @@ Widget storeTab(BuildContext context) {
         context,
         MaterialPageRoute(builder: (context) => RecyclePage()),
       );
-    }, items: <Widget>[
-
+    },
+        items: <Widget>[Container(
+          margin: const EdgeInsets.all(8.0),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.asset("images/11.png", fit: BoxFit.cover,)
+          ),
+        )
+        ]),
     deals('Shop now!', onViewMore: () {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ShoppingPage()),
       );
-    }, items: <Widget>[]),
+    },
+        items: <Widget>[Container(
+          margin: const EdgeInsets.all(8.0),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.asset("images/12.png", fit: BoxFit.cover,)
+          ),
+        )
+        ]),
     deals('Redeem your point', onViewMore: () {
       Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => RedeemPage()),
-    );
+      );
+    },
+    items: <Widget>[Container(
+    margin: const EdgeInsets.all(8.0),
+    child: ClipRRect(
+    borderRadius: BorderRadius.circular(10.0),
+    child: Image.asset("images/10.png", fit: BoxFit.cover,)
+    ),
+    )
+  ]),
 
-    }, items: <Widget>[]),
-    ])
+  deals('Our News', onViewMore: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => NewsPage()),
+    );
+    },
+      items: <Widget>[Container(
+        margin: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.asset("images/13.png", fit: BoxFit.cover,)
+        ),
+      )
+      ]),
   ]);
 }
 
@@ -161,7 +214,7 @@ Widget sectionHeader(String headerTitle, {onViewMore}) {
         margin: EdgeInsets.only(left: 15, top: 2),
         child: TextButton(
           onPressed: onViewMore,
-          child: Text('View all ›', style: contrastText),
+          child: Text('View more ', style: contrastText),
         ),
       )
     ],
@@ -216,7 +269,12 @@ Widget headerTopCategories(BuildContext context) {
               );
 
             }),
-            headerCategoryItem('News', Fryo.book, onPressed: () {}),
+            headerCategoryItem('News', Fryo.book, onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NewsPage()),
+              );
+            }),
           ],
         ),
       )

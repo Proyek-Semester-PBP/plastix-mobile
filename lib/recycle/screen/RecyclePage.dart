@@ -92,7 +92,7 @@ class _RecyclePageState extends State<RecyclePage> {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => HomePage(pageTitle: '',)),
               );
             },
             iconSize: 21,

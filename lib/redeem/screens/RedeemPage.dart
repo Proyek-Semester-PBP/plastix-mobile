@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../shared/colors.dart';
+import '../../src/shared/colors.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../model/redeemData.dart';

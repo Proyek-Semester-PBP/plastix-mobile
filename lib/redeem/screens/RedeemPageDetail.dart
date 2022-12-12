@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import '../shared/colors.dart';
+import '../../src/shared/colors.dart';
 import '../model/redeemData.dart';
 
 import'RedeemPage.dart';

@@ -10,7 +10,7 @@ import './SignInPage.dart';
 class HomePage extends StatefulWidget {
   // final String pageTitle;
 
-  HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key, required String pageTitle}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
