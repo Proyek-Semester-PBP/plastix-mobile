@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fryo/src/screens/RedeemPage.dart';
@@ -6,16 +10,19 @@ import 'package:fryo/src/screens/HomePage.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/fryo_icons.dart';
-import './ProductPage.dart';
-import '../shared/Product.dart';
-import 'package:page_transition/page_transition.dart';
 
-import '../shared/partials.dart';
+import './EditProfilePage.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:postgres/postgres.dart';
+
 import '../utils/user_prefrences.dart';
 import '../widget/button_widget.dart';
 import '../widget/profile_widget.dart';
 import '../widget/number_widget.dart';
 import '../model/user.dart';
+import '../model/UserData.dart';
 
 class ProfilePage extends StatefulWidget {
   final String pageTitle;
@@ -27,6 +34,41 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  Future<List<UserData>> dataFuture;
+
+  @override
+  void initState() {
+    super.initState();
+
+    dataFuture = fetchUser();
+  }
+
+  Future<List<UserData>> fetchUser() async {
+    var url = Uri.parse(
+        'postgres://udluzxbfbzeywk:83bde16c0226a885e02102aee8d5dc33b859ec133b96d0308ec29310d9fbbcc8@ec2-54-163-34-107.compute-1.amazonaws.com:5432/d16aenjlnqbh7t');
+    var response = await http.get(
+      url,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Content-Type": "application/json",
+      },
+    );
+
+    // melakukan decode response menjadi bentuk json
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    // melakukan konversi data json menjadi object UserData
+    List<UserData> listUserData = [];
+    for (var d in data) {
+      if (d != null) {
+        listUserData.add(UserData.fromJson(d));
+      }
+    }
+
+    return listUserData;
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = UserPrefrences.myUser;
@@ -52,34 +94,44 @@ class _ProfilePageState extends State<ProfilePage> {
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),
             ),
-            // IconButton(
-            //   padding: EdgeInsets.all(0),
-            //   onPressed: () {},
-            //   iconSize: 21,
-            //   icon: Icon(Fryo.alarm),
-            // )
           ],
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20),
-          child: ListView(
-            physics: BouncingScrollPhysics(),
-            children: [
-              ProfileWidget(
-                imagePath: user.imagePath,
-                onClicked: () async {},
-              ),
-              const SizedBox(height: 24),
-              buildName(user),
-              const SizedBox(height: 24),
-              Center(child: buildButton()),
-              const SizedBox(height: 24),
-              NumbersWidget(),
-              const SizedBox(height: 24),
-              buildAbout(user),
-            ],
-          ),
-        ));
+        body: FutureBuilder(
+            future: dataFuture,
+            builder: (context, AsyncSnapshot snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return const Center(child: CircularProgressIndicator());
+                case ConnectionState.done:
+                default:
+                  if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  } else if (snapshot.hasData) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      child: ListView(
+                        physics: BouncingScrollPhysics(),
+                        children: [
+                          ProfileWidget(
+                            imagePath: user.imagePath,
+                            onClicked: () async {},
+                          ),
+                          const SizedBox(height: 24),
+                          buildName(user),
+                          const SizedBox(height: 24),
+                          Center(child: buildButton()),
+                          const SizedBox(height: 24),
+                          NumbersWidget(),
+                          const SizedBox(height: 24),
+                          buildAbout(user),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return const Text('No data');
+                  }
+              }
+            }));
   }
 
   Widget buildName(User user) => Column(
@@ -98,7 +150,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget buildButton() => ButtonWidget(
         text: 'Edit Profile',
-        onClicked: () {},
+        onClicked: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => EditProfilePage()),
+          );
+        },
       );
 
   Widget buildAbout(User user) => Column(
@@ -136,8 +193,10 @@ class _ProfilePageState extends State<ProfilePage> {
       );
 
   Widget buildIcon(IconData icon) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          SizedBox(
+            width: 60,
+          ),
           CircleAvatar(
             radius: 25,
             child: Center(
@@ -145,6 +204,9 @@ class _ProfilePageState extends State<ProfilePage> {
               icon,
               size: 32,
             )),
+          ),
+          SizedBox(
+            width: 20,
           ),
           Text(
             'AlvaroLuqmanW',

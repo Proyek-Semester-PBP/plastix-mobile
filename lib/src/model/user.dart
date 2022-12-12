@@ -1,11 +1,11 @@
 class User {
-  final String imagePath;
-  final String name;
-  final String email;
-  final String phone;
-  final String github;
+  String imagePath;
+  String name;
+  String email;
+  String phone;
+  String github;
 
-  const User({
+  User({
     this.imagePath,
     this.name,
     this.email,
