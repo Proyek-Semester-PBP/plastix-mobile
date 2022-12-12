@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import '../shared/colors.dart';
 import '../model/redeemData.dart';
+
 import'RedeemPage.dart';
 
 
@@ -13,21 +16,31 @@ class RedeemPageDetail extends StatefulWidget {
 
 class RedeemPageDetailState extends State<RedeemPageDetail> {
   Fields currentFields = Details.test;
-  @override
+  late Image foto;
+
+
+
+  Image addImage() {
+    String jenis = currentFields.jenisVoucher.toString();
+    if (jenis == 'voucher belanja') {
+      foto = Image.asset('images/belanja.png');
+    } else if (jenis == "voucher merchant") {
+      foto = Image.asset('images/shop.png');
+    } else if (jenis == "pulsa"){
+      foto = Image.asset('images/pulsa.png');
+    } else{
+      foto = Image.asset('images/9.png');
+
+    }
+    return foto;
+  }
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
         backgroundColor: primaryColor,
-        actions: <Widget>[
-          // IconButton(
-          //   padding: EdgeInsets.all(0),
-          //   onPressed: () {},
-          //   iconSize: 25,
-          //   icon: Icon(Fryo.arrow_left),
-          // )
-        ],
       ),
       body: Column(
         children: <Widget>[
@@ -44,12 +57,17 @@ class RedeemPageDetailState extends State<RedeemPageDetail> {
                       alignment: Alignment.center,
                       child: Column(
                         children: <Widget>[
+                          // addImage(),
+                          Image.asset('images/10.png',
+                          alignment: Alignment.topCenter,
+                            height: MediaQuery.of(context).size.height*0.3,
+                          ),
                           Text(
                             currentFields.titleVoucher,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 30,
+                              fontSize: 20,
                             ),
                           ),
                         ],
@@ -65,9 +83,13 @@ class RedeemPageDetailState extends State<RedeemPageDetail> {
                             fontSize: 14.0,
                             color: Colors.black,
                           ),
-                          children: <TextSpan>[
-                            const TextSpan(
-                              text: 'Poin:  ',
+
+                          children: [
+                            WidgetSpan(
+                              child: Icon(Icons.money, size: 14),
+                            ),
+                             TextSpan(
+                              text: 'Poin  \n',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             TextSpan(text: currentFields.hargaPoin.toString()),
@@ -86,7 +108,7 @@ class RedeemPageDetailState extends State<RedeemPageDetail> {
                           ),
                           children: <TextSpan>[
                             const TextSpan(
-                              text: 'Rating: ',
+                              text: 'Deskripsi \n',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             TextSpan(text: currentFields.deskripsi.toString()),
@@ -94,88 +116,74 @@ class RedeemPageDetailState extends State<RedeemPageDetail> {
                       ),
                     ),
                   ),
-                  // if(Watched.DONE == true)...[
-                  //   Padding(
-                  //     padding: const EdgeInsets.all(5.0),
-                  //     child: RichText(
-                  //       textAlign: TextAlign.start,
-                  //       text: const TextSpan(
-                  //           style: TextStyle(
-                  //             fontSize: 14.0,
-                  //             color: Colors.black,
-                  //           ),
-                  //           children: <TextSpan>[
-                  //             TextSpan(
-                  //               text: 'Status: ',
-                  //               style: TextStyle(fontWeight: FontWeight.bold),
-                  //             ),
-                  //             TextSpan(text:'watched'),
-                  //           ]
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ]
-                  // else ...[
-                  //   Padding(
-                  //     padding: const EdgeInsets.all(5.0),
-                  //     child: RichText(
-                  //       textAlign: TextAlign.start,
-                  //       text: const TextSpan(
-                  //           style: TextStyle(
-                  //             fontSize: 14.0,
-                  //             color: Colors.black,
-                  //           ),
-                  //           children: <TextSpan>[
-                  //             TextSpan(
-                  //               text: 'Status: ',
-                  //               style: TextStyle(fontWeight: FontWeight.bold),
-                  //             ),
-                  //             TextSpan(text: 'not watched'),
-                  //           ]
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ],
-                  const Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Text(
-                      "Review: ",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text(
-                      currentFields.hargaPoin.toString(),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
                 ]
             ),
           ),
           const Spacer(),
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
             child:Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [TextButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+
+              children: [
+                TextButton(
+                  style: ButtonStyle(
+                    fixedSize: MaterialStateProperty.all<Size>(Size(30, 40)),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                  ),
+                  onPressed: () => _dialogBuilder(context),
+
+                  child: const Text('Redeem',
+                  ),
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Back'),
-              ),
+
               ],
             ),
           ),
         ],
       ),
     );
+
   }
+
+
+
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Get The Voucher!'),
+          content: const Text('Are you sure want to redeem the points?'),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Confirm'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
 }
+
 
