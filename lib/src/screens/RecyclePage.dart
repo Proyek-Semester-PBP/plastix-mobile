@@ -7,6 +7,9 @@ import '../shared/fryo_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:fryo/src/screens/HomePage.dart';
 import 'dart:js' as js;
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:fryo/src/utils/fetchHistory.dart';
 
 class RecyclePage extends StatefulWidget {
   final String pageTitle;
@@ -72,6 +75,7 @@ class _RecyclePageState extends State<RecyclePage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.read<CookieRequest>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -80,7 +84,7 @@ class _RecyclePageState extends State<RecyclePage> {
         elevation: 0,
         backgroundColor: primaryColor,
         title:
-            Text('PlastiX', style: logoWhiteStyle, textAlign: TextAlign.center),
+            Text('Recycle', style: logoWhiteStyle, textAlign: TextAlign.center),
         actions: <Widget>[
           IconButton(
             padding: EdgeInsets.only(),
@@ -108,7 +112,8 @@ class _RecyclePageState extends State<RecyclePage> {
                     style: TextStyle(fontSize: 17),
                   )),
               Card(
-                margin: EdgeInsets.all(80.0),
+                margin: EdgeInsets.only(
+                    left: 80.0, right: 80.0, bottom: 80.0, top: 50.0),
                 elevation: 20,
                 shape: (RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25))),
@@ -391,7 +396,8 @@ class _RecyclePageState extends State<RecyclePage> {
                 height: 190,
               ),
               Card(
-                margin: EdgeInsets.all(20.0),
+                margin: EdgeInsets.only(
+                    top: 20.0, bottom: 20.0, left: 80.0, right: 80.0),
                 elevation: 20,
                 shape: (RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25))),
@@ -431,7 +437,112 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                   ]),
                 ),
-              )
+              ),
+              FutureBuilder(
+                  future: fetchHistory(request),
+                  builder: (context, AsyncSnapshot snapshot) {
+                    if (snapshot.data == null) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      if (snapshot.data.length == 0) {
+                        return Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(30.0),
+                            ),
+                            Text(
+                              "No History",
+                              style: TextStyle(
+                                  color: Color(0xFF198754), fontSize: 20),
+                            ),
+                            SizedBox(height: 8),
+                          ],
+                        );
+                      } else {
+                        return Container(
+                          color: Colors.white,
+                          padding: EdgeInsets.only(
+                              top: 50.0, left: 20, right: 20, bottom: 50),
+                          child: Table(
+                            border: TableBorder.all(
+                                color: Color.fromARGB(255, 157, 194, 148)),
+                            children: [
+                              TableRow(
+                                  decoration: BoxDecoration(
+                                      color:
+                                          Color.fromARGB(255, 205, 241, 197)),
+                                  children: [
+                                    Text('Name',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center),
+                                    Text('Date',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center),
+                                    Text('Location',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center),
+                                    Text('Weight',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center),
+                                    Text('Description',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center),
+                                  ]),
+                              snapshot.data.map((history) {
+                                return TableRow(
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 205, 241, 197)),
+                                    children: [
+                                      Text(history.fields.name,
+                                          textAlign: TextAlign.center),
+                                      Text(history.fields.date,
+                                          textAlign: TextAlign.center),
+                                      Text(history.fields.location,
+                                          textAlign: TextAlign.center),
+                                      Text(history.fields.weight.toString(),
+                                          textAlign: TextAlign.center),
+                                      Text(history.fields.description,
+                                          textAlign: TextAlign.center),
+                                    ]);
+                              }).toList(),
+                              // TableRow(
+                              //     decoration: BoxDecoration(
+                              //         color:
+                              //             Color.fromARGB(255, 205, 241, 197)),
+                              //     children: [
+                              //       Text('Name',
+                              //           style: TextStyle(
+                              //               fontWeight: FontWeight.bold),
+                              //           textAlign: TextAlign.center),
+                              //       Text('Date',
+                              //           style: TextStyle(
+                              //               fontWeight: FontWeight.bold),
+                              //           textAlign: TextAlign.center),
+                              //       Text('Location',
+                              //           style: TextStyle(
+                              //               fontWeight: FontWeight.bold),
+                              //           textAlign: TextAlign.center),
+                              //       Text('Weight',
+                              //           style: TextStyle(
+                              //               fontWeight: FontWeight.bold),
+                              //           textAlign: TextAlign.center),
+                              //       Text('Description',
+                              //           style: TextStyle(
+                              //               fontWeight: FontWeight.bold),
+                              //           textAlign: TextAlign.center),
+                              //     ]),
+                            ],
+                          ),
+                        );
+                      }
+                    }
+                  }),
             ],
           ),
         ),

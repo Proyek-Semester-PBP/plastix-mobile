@@ -5,6 +5,8 @@ import '../shared/fryo_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:fryo/src/screens/RecyclePage.dart';
 import 'package:fryo/src/screens/HomePage.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class FormDropoff extends StatefulWidget {
   final String pageTitle;
@@ -17,6 +19,7 @@ class FormDropoff extends StatefulWidget {
 
 class _FormDropoffState extends State<FormDropoff> {
   final _formKey = GlobalKey<FormState>();
+
   String _name = "";
   int _weight = 0;
   String _location = "";
@@ -24,8 +27,22 @@ class _FormDropoffState extends State<FormDropoff> {
   DateTime _date;
   bool _is_pickup = false;
 
+  void post_history(
+      request, name, weight, description, is_pickup, location) async {
+    await request.post(
+        "https://proyek-semester-pbp.up.railway.app/recycle/add_history_flutter/",
+        {
+          "name": name,
+          "weight": weight,
+          "description": description,
+          "is_pickup": is_pickup,
+          "location": location,
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final request = context.read<CookieRequest>();
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -277,9 +294,9 @@ class _FormDropoffState extends State<FormDropoff> {
                                   if (_formKey.currentState.validate()) {
                                     _formKey.currentState.save();
                                     setState(() {
-                                      _date = DateTime.now();
-                                      // Budget newBudget = Budget(_judul, _nominal, _jenis, tanggal);
-                                      // DataBudget.data.add(newBudget);
+                                      // _date = DateTime.now();
+                                      // post_history(request, _name, _weight,
+                                      //     _description, _is_pickup, _location);
                                     });
                                     showDialog(
                                       context: context,
@@ -300,22 +317,25 @@ class _FormDropoffState extends State<FormDropoff> {
                                                     child: Column(
                                                   children: [
                                                     Text(
-                                                      "Congratulations, you get ... points",
+                                                      "Congratulations, you get " +
+                                                          (_weight * 5)
+                                                              .toString() +
+                                                          " points",
                                                       style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                       ),
                                                     ),
-                                                    Text(_name +
-                                                        " " +
-                                                        _weight.toString() +
-                                                        " " +
-                                                        _location +
-                                                        " " +
-                                                        _description +
-                                                        " " +
-                                                        _date.toString())
+                                                    // Text(_name +
+                                                    //     " " +
+                                                    //     _weight.toString() +
+                                                    //     " " +
+                                                    //     _location +
+                                                    //     " " +
+                                                    //     _description +
+                                                    //     " " +
+                                                    //     _date.toString())
                                                   ],
                                                 )),
                                                 SizedBox(height: 20),

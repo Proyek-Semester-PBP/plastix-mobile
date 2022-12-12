@@ -5,6 +5,8 @@ import '../shared/fryo_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:fryo/src/screens/RecyclePage.dart';
 import 'package:fryo/src/screens/HomePage.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class FormPickup extends StatefulWidget {
   final String pageTitle;
@@ -29,8 +31,22 @@ class _FormPickupState extends State<FormPickup> {
   DateTime _date;
   bool _is_pickup = true;
 
+  void post_history(
+      request, name, weight, description, is_pickup, location) async {
+    await request.post(
+        "https://proyek-semester-pbp.up.railway.app/recycle/add_history_flutter/",
+        {
+          "name": name,
+          "weight": weight,
+          "description": description,
+          "is_pickup": is_pickup,
+          "location": location,
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final request = context.read<CookieRequest>();
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -315,7 +331,8 @@ class _FormPickupState extends State<FormPickup> {
                                           _region +
                                           " - " +
                                           _zipcode.toString();
-                                      _date = DateTime.now();
+                                      // post_history(request, _name, _weight,
+                                      //     _description, _is_pickup, _location);
                                       // Budget newBudget = Budget(_judul, _nominal, _jenis, tanggal);
                                       // DataBudget.data.add(newBudget);
                                     });
@@ -338,18 +355,21 @@ class _FormPickupState extends State<FormPickup> {
                                                     child: Column(
                                                   children: [
                                                     Text(
-                                                      "Congratulations, you get ... points",
+                                                      "Congratulations, you get " +
+                                                          (_weight * 5)
+                                                              .toString() +
+                                                          " points",
                                                       style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                       ),
                                                     ),
-                                                    Text(_location +
-                                                        " " +
-                                                        _description +
-                                                        " " +
-                                                        _date.toString())
+                                                    // Text(_location +
+                                                    //     " " +
+                                                    //     _description +
+                                                    //     " " +
+                                                    //     _date.toString())
                                                   ],
                                                 )),
                                                 SizedBox(height: 20),

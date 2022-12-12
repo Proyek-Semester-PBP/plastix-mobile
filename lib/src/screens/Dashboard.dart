@@ -33,7 +33,7 @@ class _DashboardState extends State<Dashboard> {
       Text('Tab3'),
       // RedeemPage(context).
       Text('Tab5'),
-      Text('tab6'),
+      Text('Tab6'),
     ];
 
     return Scaffold(
@@ -42,13 +42,17 @@ class _DashboardState extends State<Dashboard> {
           centerTitle: true,
           elevation: 0,
           backgroundColor: primaryColor,
-          title:
-              Text('PlastiX', style: logoWhiteStyle, textAlign: TextAlign.center),
+          title: Text('PlastiX',
+              style: logoWhiteStyle, textAlign: TextAlign.center),
           actions: <Widget>[
             IconButton(
               padding: EdgeInsets.only(),
               onPressed: () {
-                  Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: HomePage()));
+                Navigator.pushReplacement(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.rightToLeft,
+                        child: HomePage()));
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),
@@ -62,10 +66,10 @@ class _DashboardState extends State<Dashboard> {
             IconButton(
               padding: EdgeInsets.all(0),
               onPressed: () {
-                 Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  ProfilePage()),
-                    );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
+                );
               },
               iconSize: 25,
               icon: Icon(Fryo.user_1),
@@ -76,29 +80,25 @@ class _DashboardState extends State<Dashboard> {
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Fryo.home),
-                label: 'Home',
-
-                ),
+              icon: Icon(Fryo.home),
+              label: 'Home',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Fryo.cart),
-                label:  'Shopping',
-                ),
+              icon: Icon(Fryo.cart),
+              label: 'Shopping',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Fryo.book),
-                label:
-                  'News',
-                ),
+              icon: Icon(Fryo.book),
+              label: 'News',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Fryo.gift),
-                label:
-                  'Redeem',
-                ),
+              icon: Icon(Fryo.gift),
+              label: 'Redeem',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Fryo.location),
-                label:
-                  'Recycle',
-                ),
+              icon: Icon(Fryo.location),
+              label: 'Recycle',
+            ),
           ],
           currentIndex: _selectedIndex,
           type: BottomNavigationBarType.fixed,
@@ -108,14 +108,20 @@ class _DashboardState extends State<Dashboard> {
   }
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 4) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => RecyclePage()),
+      );
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 }
 
 Widget storeTab(BuildContext context) {
-
   // will pick it up from here
   // am to start another template
   List<Product> foods = [
@@ -229,20 +235,13 @@ Widget storeTab(BuildContext context) {
       //
       // }),
     ]),
-
-    deals('Shop now!', onViewMore: () {
-
-    }, items: <Widget>[
-    ]),
-
+    deals('Shop now!', onViewMore: () {}, items: <Widget>[]),
     deals('Redeem your point', onViewMore: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) =>  RedeemPage()),
-        );
-    }, items: <Widget>[
-    ]),
-
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => RedeemPage()),
+      );
+    }, items: <Widget>[]),
     deals('News', onViewMore: () {}, items: <Widget>[
       foodItem(drinks[0], onTapped: () {
         Navigator.push(
@@ -331,6 +330,7 @@ Widget secHeader(String headerTitle) {
     ],
   );
 }
+
 // wrap the horizontal listview inside a sizedBox..
 Widget headerTopCategories(BuildContext context) {
   return Column(
@@ -347,14 +347,14 @@ Widget headerTopCategories(BuildContext context) {
             headerCategoryItem('Recycle', Fryo.location, onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  RecyclePage()),
+                MaterialPageRoute(builder: (context) => RecyclePage()),
               );
             }),
             headerCategoryItem('Shopping', Fryo.cart, onPressed: () {}),
             headerCategoryItem('Redeem', Fryo.gift, onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  RedeemPage()),
+                MaterialPageRoute(builder: (context) => RedeemPage()),
               );
             }),
             headerCategoryItem('News', Fryo.book, onPressed: () {}),
@@ -416,4 +416,3 @@ Widget deals(String dealTitle, {onViewMore, List<Widget> items}) {
     ),
   );
 }
-
