@@ -48,6 +48,12 @@ class _DashboardState extends State<Dashboard> {
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),
             ),
+            // IconButton(
+            //   padding: EdgeInsets.all(0),
+            //   onPressed: () {},
+            //   iconSize: 21,
+            //   icon: Icon(Fryo.alarm),
+            // )
             IconButton(
               padding: EdgeInsets.all(0),
               onPressed: () {},
@@ -99,8 +105,6 @@ class _DashboardState extends State<Dashboard> {
 }
 
 Widget storeTab(BuildContext context) {
-
-
   return ListView(children: <Widget>[
     headerTopCategories(context),
     deals('Change your plastic now!', onViewMore: () {}, items: <Widget>[
@@ -118,6 +122,57 @@ Widget storeTab(BuildContext context) {
         );
     }, items: <Widget>[
     ]),
+
+    // deals('News', onViewMore: () {}, items: <Widget>[
+    //   // foodItem(drinks[0], onTapped: () {
+    //   //   Navigator.push(
+    //   //     context,
+    //   //     MaterialPageRoute(
+    //   //       builder: (context) {
+    //           // return new ProductPage(
+    //           //   productData: drinks[0],
+    //           // );
+    //         // },
+    //       ),
+    //     );
+      // }, onLike: () {}, imgWidth: 60),
+      // foodItem(drinks[1], onTapped: () {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) {
+      //         return new ProductPage(
+      //           productData: drinks[1],
+      //         );
+      //       },
+      //     ),
+      //   );
+    //   }, onLike: () {}, imgWidth: 75),
+    //   foodItem(drinks[2], onTapped: () {
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(
+    //         builder: (context) {
+    //           return new ProductPage(
+    //             productData: drinks[2],
+    //           );
+    //         },
+    //       ),
+    //     );
+    //   }, imgWidth: 110, onLike: () {}),
+    //   foodItem(drinks[3], onTapped: () {
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(
+    //         builder: (context) {
+    //           return new ProductPage(
+    //             productData: drinks[3],
+    //           );
+    //         },
+    //       ),
+    //     );
+    //   }, onLike: () {}),
+    // ])
   ]);
 }
 
