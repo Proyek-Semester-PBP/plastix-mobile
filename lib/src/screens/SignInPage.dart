@@ -75,12 +75,13 @@ class _SignInPageState extends State<SignInPage> {
                                 horizontal: 20, vertical: 10),
                             border: inputFieldDefaultBorderStyle),
                         // controller: myController,
-                        onChanged: (String _username) {
+                        onChanged: (String? _username) {
                           setState(() {
-                            username = _username;
+                            username = _username!;
                           });
                         },
                       ),
+                      const SizedBox(height: 10),
                       TextField(
                         obscureText: true,
                         style: inputFieldHintPaswordTextStyle,
@@ -92,9 +93,9 @@ class _SignInPageState extends State<SignInPage> {
                                 horizontal: 20, vertical: 10),
                             border: inputFieldDefaultBorderStyle),
                         // controller: myController,
-                        onChanged: (String _password1) {
+                        onChanged: (String? _password1) {
                           setState(() {
-                            password1 = _password1;
+                            password1 = _password1!;
                           });
                         },
                       ),
@@ -147,6 +148,8 @@ class _SignInPageState extends State<SignInPage> {
                         } else {
                           // Code here will run if the login failed (wrong username/password).
                           debugPrint("Username or password is incorrect!");
+                          _showDialog(
+                              context, "Username or password is incorrect!");
                           // debugPrint(response["message"]);
                         }
                       },
@@ -159,4 +162,24 @@ class _SignInPageState extends State<SignInPage> {
           ],
         ));
   }
+}
+
+void _showDialog(BuildContext context, String description) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text("Login Failed"),
+        content: Text(description),
+        actions: <Widget>[
+          TextButton(
+            child: const Text("OK"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

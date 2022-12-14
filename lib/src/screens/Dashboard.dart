@@ -5,7 +5,9 @@ import 'package:fryo/shopping/screens/shopping_page.dart';
 import 'package:fryo/redeem/screens/RedeemPage.dart';
 import 'package:fryo/news/screens/NewsPage.dart';
 
-import 'package:fryo/src/screens/ProfilePage.dart';
+import 'package:fryo/profile/screens/ProfilePage.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 import '../shared/styles.dart';
 import '../shared/colors.dart';
@@ -26,6 +28,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     final _tabs = [
       storeTab(context),
       Text('Tab2'),
@@ -45,10 +48,17 @@ class _DashboardState extends State<Dashboard> {
           actions: <Widget>[
             IconButton(
               padding: EdgeInsets.only(),
-              onPressed: () {
+              onPressed: () async {
+                final response = await request.logout(
+                    'https://proyek-semester-pbp.up.railway.app/auth/logout/');
+                debugPrint(response['message'].toString());
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage(pageTitle: '',)),);
+                  MaterialPageRoute(
+                      builder: (context) => HomePage(
+                            pageTitle: '',
+                          )),
+                );
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),
@@ -114,13 +124,11 @@ class _DashboardState extends State<Dashboard> {
         context,
         MaterialPageRoute(builder: (context) => NewsPage()),
       );
-
     } else if (index == 3) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => RedeemPage()),
       );
-
     } else if (index == 4) {
       Navigator.push(
         context,
@@ -138,7 +146,6 @@ Widget storeTab(BuildContext context) {
   // will pick it up from here
   // am to start another template
 
-
   return ListView(children: <Widget>[
     headerTopCategories(context),
     deals('Change your plastic now!', onViewMore: () {
@@ -146,58 +153,65 @@ Widget storeTab(BuildContext context) {
         context,
         MaterialPageRoute(builder: (context) => RecyclePage()),
       );
-    },
-        items: <Widget>[Container(
-          margin: const EdgeInsets.all(8.0),
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Image.asset("images/11.png", fit: BoxFit.cover,)
-          ),
-        )
-        ]),
+    }, items: <Widget>[
+      Container(
+        margin: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.asset(
+              "images/11.png",
+              fit: BoxFit.cover,
+            )),
+      )
+    ]),
     deals('Shop now!', onViewMore: () {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ShoppingPage()),
       );
-    },
-        items: <Widget>[Container(
-          margin: const EdgeInsets.all(8.0),
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Image.asset("images/12.png", fit: BoxFit.cover,)
-          ),
-        )
-        ]),
-    deals('Redeem your point', onViewMore: () {
-      Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => RedeemPage()),
-      );
-    },
-    items: <Widget>[Container(
-    margin: const EdgeInsets.all(8.0),
-    child: ClipRRect(
-    borderRadius: BorderRadius.circular(10.0),
-    child: Image.asset("images/10.png", fit: BoxFit.cover,)
-    ),
-    )
-  ]),
-
-  deals('Our News', onViewMore: () {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => NewsPage()),
-    );
-    },
-      items: <Widget>[Container(
+    }, items: <Widget>[
+      Container(
         margin: const EdgeInsets.all(8.0),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
-            child: Image.asset("images/13.png", fit: BoxFit.cover,)
-        ),
+            child: Image.asset(
+              "images/12.png",
+              fit: BoxFit.cover,
+            )),
       )
-      ]),
+    ]),
+    deals('Redeem your point', onViewMore: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => RedeemPage()),
+      );
+    }, items: <Widget>[
+      Container(
+        margin: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.asset(
+              "images/10.png",
+              fit: BoxFit.cover,
+            )),
+      )
+    ]),
+    deals('Our News', onViewMore: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => NewsPage()),
+      );
+    }, items: <Widget>[
+      Container(
+        margin: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.asset(
+              "images/13.png",
+              fit: BoxFit.cover,
+            )),
+      )
+    ]),
   ]);
 }
 
@@ -267,7 +281,6 @@ Widget headerTopCategories(BuildContext context) {
                 context,
                 MaterialPageRoute(builder: (context) => RedeemPage()),
               );
-
             }),
             headerCategoryItem('News', Fryo.book, onPressed: () {
               Navigator.push(
@@ -321,12 +334,12 @@ Widget deals(String dealTitle, {onViewMore, List<Widget>? items}) {
             children: (items != null)
                 ? items
                 : <Widget>[
-              Container(
-                margin: EdgeInsets.only(left: 15),
-                child: Text('No items available at this moment.',
-                    style: taglineText),
-              )
-            ],
+                    Container(
+                      margin: EdgeInsets.only(left: 15),
+                      child: Text('No items available at this moment.',
+                          style: taglineText),
+                    )
+                  ],
           ),
         )
       ],
