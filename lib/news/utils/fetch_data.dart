@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../model/data.dart';
+import 'package:fryo/news/model/Data.dart';
 
 Future<List<News>> fetchData() async {
   var url = Uri.parse('https://proyek-semester-pbp.up.railway.app/news/json/');
