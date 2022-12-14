@@ -1,8 +1,8 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:plastix/shopping/models/fetch_models.dart';
-import 'package:plastix/shopping/screens/item_detail.dart';
-import 'package:plastix/shopping/screens/vendor_detail.dart';
+import 'package:fryo/shopping/models/fetch_models.dart';
+import 'package:fryo/shopping/screens/item_detail.dart';
+import 'package:fryo/shopping/screens/vendor_detail.dart';
 
 class ShoppingPage extends StatefulWidget {
   const ShoppingPage({super.key});

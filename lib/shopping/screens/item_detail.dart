@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:plastix/shopping/models/recommended_item.dart';
+import 'package:fryo/shopping/models/recommended_item.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ItemDetail extends StatefulWidget {

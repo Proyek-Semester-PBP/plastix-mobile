@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:plastix/shopping/models/recommended_item.dart';
-import 'package:plastix/shopping/models/recommended_vendor.dart';
+import 'package:fryo/shopping/models/recommended_item.dart';
+import 'package:fryo/shopping/models/recommended_vendor.dart';
 
 Future<List<RecommendedItem>> fetchRecommendedItem() async {
   Uri url = Uri.parse('https://proyek-semester-pbp.up.railway.app/shopping/json-item/');

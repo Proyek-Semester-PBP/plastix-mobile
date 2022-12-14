@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plastix/shopping/models/recommended_vendor.dart';
+import 'package:fryo/shopping/models/recommended_vendor.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class VendorDetail extends StatefulWidget {
