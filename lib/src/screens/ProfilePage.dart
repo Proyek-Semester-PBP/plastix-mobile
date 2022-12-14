@@ -39,8 +39,12 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: EdgeInsets.only(),
               onPressed: () {
                 Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage(pageTitle: '',)),);
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => HomePage(
+                            pageTitle: '',
+                          )),
+                );
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),
@@ -72,14 +76,13 @@ class _ProfilePageState extends State<ProfilePage> {
               buildAbout(user),
             ],
           ),
-        )
-      );
+        ));
   }
 
   Widget buildName(User user) => Column(
         children: [
           Text(
-            user.name,
+            user.toString(),
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           const SizedBox(height: 4),

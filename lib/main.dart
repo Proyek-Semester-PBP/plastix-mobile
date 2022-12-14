@@ -25,9 +25,10 @@ class MyApp extends StatelessWidget {
         ListenableProvider<UserProvider>(create: (_) {
           UserProvider userProvider = UserProvider(
               userTemp: UserData(
+                  user: "Guest",
                   name: "Guest",
                   email: "-",
-                  mobile: "",
+                  mobile: "-",
                   github: "-",
                   instagram: "-",
                   twitter: "-",

@@ -13,6 +13,7 @@ String userDataToJson(List<UserData> data) =>
 
 class UserData {
   UserData({
+    required this.user,
     required this.name,
     required this.email,
     required this.mobile,
@@ -26,6 +27,7 @@ class UserData {
     required this.profpic,
   });
 
+  String user;
   String name;
   String email;
   String mobile;
@@ -39,6 +41,7 @@ class UserData {
   String profpic;
 
   factory UserData.fromJson(Map<String, dynamic> json) => UserData(
+        user: json["user"],
         name: json["name"],
         email: json["email"],
         mobile: json["mobile"],
@@ -53,6 +56,7 @@ class UserData {
       );
 
   Map<String, dynamic> toJson() => {
+        "user": user,
         "name": name,
         "email": email,
         "mobile": mobile,

@@ -5,9 +5,15 @@ class UserProvider with ChangeNotifier {
   UserProvider({required this.userTemp});
   UserData userTemp;
 
-  UserData get user => userTemp;
-  set user(UserData u) {
-    user = u;
+  // UserData get user => userTemp;
+  // set user(UserData u) {
+  //   user = u;
+  //   notifyListeners();
+  // }
+
+  String get user => userTemp.user;
+  set user(String value) {
+    userTemp.user = value;
     notifyListeners();
   }
 
@@ -17,9 +23,15 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  String get username => userTemp.name;
-  set username(String value) {
+  String get name => userTemp.name;
+  set name(String value) {
     userTemp.name = value;
+    notifyListeners();
+  }
+
+  String get mobile => userTemp.mobile;
+  set mobile(String value) {
+    userTemp.mobile = value;
     notifyListeners();
   }
 
@@ -49,7 +61,7 @@ class UserProvider with ChangeNotifier {
 
   String get facebook => userTemp.facebook;
   set facebook(String value) {
-    userTemp.email = value;
+    userTemp.facebook = value;
     notifyListeners();
   }
 
