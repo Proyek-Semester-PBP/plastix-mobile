@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../profile/utils/userProvider.dart';
 import '../../src/shared/styles.dart';
 import '../../src/shared/colors.dart';
 import '../../src/shared/fryo_icons.dart';
@@ -29,7 +30,7 @@ class _FormDropoffState extends State<FormDropoff> {
   void post_history(
       request, name, weight, description, is_pickup, location) async {
     await request.post(
-        "https://proyek-semester-pbp.up.railway.app/recycle/add_history_flutter/",
+        "https://proyek-semester-pbp.up.railway.app/auth/add_history_flutter/",
         {
           "name": name,
           "weight": weight,
@@ -42,6 +43,8 @@ class _FormDropoffState extends State<FormDropoff> {
   @override
   Widget build(BuildContext context) {
     final request = context.read<CookieRequest>();
+    final userProvider = context.watch<UserProvider>();
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -56,8 +59,12 @@ class _FormDropoffState extends State<FormDropoff> {
               padding: EdgeInsets.only(),
               onPressed: () {
                 Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage(pageTitle: '',)),);
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => HomePage(
+                            pageTitle: '',
+                          )),
+                );
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),
@@ -86,9 +93,9 @@ class _FormDropoffState extends State<FormDropoff> {
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String value) {
+                                onChanged: (String? value) {
                                   setState(() {
-                                    _name = value;
+                                    _name = value!;
                                   });
                                 },
                                 onSaved: (String? value) {
@@ -109,14 +116,15 @@ class _FormDropoffState extends State<FormDropoff> {
                                   top: 7, right: 30, left: 30, bottom: 7),
                               child: TextFormField(
                                 decoration: InputDecoration(
-                                  hintText: "Enter the plastic weight",
+                                  hintText:
+                                      "Enter the plastic weight in kilograms",
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String value) {
+                                onChanged: (String? value) {
                                   setState(() {
-                                    _weight = int.parse(value);
+                                    _weight = int.parse(value!);
                                   });
                                 },
                                 onSaved: (String? value) {
@@ -145,9 +153,9 @@ class _FormDropoffState extends State<FormDropoff> {
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String value) {
+                                onChanged: (String? value) {
                                   setState(() {
-                                    _description = value;
+                                    _description = value!;
                                   });
                                 },
                                 onSaved: (String? value) {
@@ -338,7 +346,18 @@ class _FormDropoffState extends State<FormDropoff> {
                                                 SizedBox(height: 20),
                                                 TextButton(
                                                   child: Text('Ok'),
-                                                  onPressed: () {
+                                                  onPressed: () async {
+                                                    userProvider.weight +=
+                                                        _weight;
+                                                    userProvider.point +=
+                                                        _weight * 5;
+                                                    final response =
+                                                        await request.post(
+                                                            'https://proyek-semester-pbp.up.railway.app/auth/addpoints/',
+                                                            {
+                                                          "weights": _weight
+                                                              .toString(),
+                                                        });
                                                     Navigator.pop(context);
                                                     setState(() {
                                                       _name = "";

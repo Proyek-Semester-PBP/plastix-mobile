@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../profile/utils/userProvider.dart';
 import '../../src/shared/styles.dart';
 import '../../src/shared/colors.dart';
 import '../../src/shared/fryo_icons.dart';
@@ -33,7 +34,7 @@ class _FormPickupState extends State<FormPickup> {
   void post_history(
       request, name, weight, description, is_pickup, location) async {
     await request.post(
-        "https://proyek-semester-pbp.up.railway.app/recycle/add_history_flutter/",
+        "https://proyek-semester-pbp.up.railway.app/auth/add_history_flutter/",
         {
           "name": name,
           "weight": weight,
@@ -46,6 +47,8 @@ class _FormPickupState extends State<FormPickup> {
   @override
   Widget build(BuildContext context) {
     final request = context.read<CookieRequest>();
+    final userProvider = context.watch<UserProvider>();
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -60,8 +63,12 @@ class _FormPickupState extends State<FormPickup> {
               padding: EdgeInsets.only(),
               onPressed: () {
                 Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage(pageTitle: '',)),);
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => HomePage(
+                            pageTitle: '',
+                          )),
+                );
               },
               iconSize: 21,
               icon: Icon(Fryo.power_swtich),
@@ -90,9 +97,9 @@ class _FormPickupState extends State<FormPickup> {
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String value) {
+                                onChanged: (String? value) {
                                   setState(() {
-                                    _name = value;
+                                    _name = value!;
                                   });
                                 },
                                 onSaved: (String? value) {
@@ -118,9 +125,9 @@ class _FormPickupState extends State<FormPickup> {
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String value) {
+                                onChanged: (String? value) {
                                   setState(() {
-                                    _weight = int.parse(value);
+                                    _weight = int.parse(value!);
                                   });
                                 },
                                 onSaved: (String? value) {
@@ -148,9 +155,9 @@ class _FormPickupState extends State<FormPickup> {
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String value) {
+                                onChanged: (String? value) {
                                   setState(() {
-                                    _region = value;
+                                    _region = value!;
                                   });
                                 },
                                 onSaved: (String? value) {
@@ -176,9 +183,9 @@ class _FormPickupState extends State<FormPickup> {
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String value) {
+                                onChanged: (String? value) {
                                   setState(() {
-                                    _city = value;
+                                    _city = value!;
                                   });
                                 },
                                 onSaved: (String? value) {
@@ -204,9 +211,9 @@ class _FormPickupState extends State<FormPickup> {
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String value) {
+                                onChanged: (String? value) {
                                   setState(() {
-                                    _subdistrict = value;
+                                    _subdistrict = value!;
                                   });
                                 },
                                 onSaved: (String? value) {
@@ -232,9 +239,9 @@ class _FormPickupState extends State<FormPickup> {
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String value) {
+                                onChanged: (String? value) {
                                   setState(() {
-                                    _zipcode = int.parse(value);
+                                    _zipcode = int.parse(value!);
                                   });
                                 },
                                 onSaved: (String? value) {
@@ -263,9 +270,9 @@ class _FormPickupState extends State<FormPickup> {
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String value) {
+                                onChanged: (String? value) {
                                   setState(() {
-                                    _details = value;
+                                    _details = value!;
                                   });
                                 },
                                 onSaved: (String? value) {
@@ -292,9 +299,9 @@ class _FormPickupState extends State<FormPickup> {
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String value) {
+                                onChanged: (String? value) {
                                   setState(() {
-                                    _description = value;
+                                    _description = value!;
                                   });
                                 },
                                 onSaved: (String? value) {
@@ -372,7 +379,20 @@ class _FormPickupState extends State<FormPickup> {
                                                 SizedBox(height: 20),
                                                 TextButton(
                                                   child: Text('Ok'),
-                                                  onPressed: () {
+                                                  onPressed: () async {
+                                                    userProvider.weight +=
+                                                        _weight;
+                                                    userProvider.point +=
+                                                        _weight * 5;
+                                                    final response =
+                                                        await request.post(
+                                                            'https://proyek-semester-pbp.up.railway.app/auth/addpoints/',
+                                                            {
+                                                          "weights":
+                                                              userProvider
+                                                                  .weight
+                                                                  .toString(),
+                                                        });
                                                     Navigator.pop(context);
                                                     setState(() {
                                                       _name = "";
