@@ -16,7 +16,7 @@ class ReviewForm extends StatefulWidget {
 
 class _ReviewFormState extends State<ReviewForm> {
   final _formKey = GlobalKey<FormState>();
-  int _rating = 0;
+  int _rating = 1;
   String _comment = "";
 
   void postReview(request, rating, comment) async {
@@ -24,7 +24,7 @@ class _ReviewFormState extends State<ReviewForm> {
       "https://proyek-semester-pbp.up.railway.app/auth/post_review/",
       {
         "item": widget.item.fields.name,
-        "rating": rating,
+        "rating": rating.toString(),
         "comment": comment,
       }
     );
@@ -164,7 +164,7 @@ class _ReviewFormState extends State<ReviewForm> {
                                       ),
                                       const SizedBox(height: 6),
                                       TextButton(
-                                        onPressed: () {
+                                        onPressed: () async {
                                           Navigator.pop(context);
                                           Navigator.pop(context);
                                         },
