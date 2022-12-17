@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fryo/shopping/screens/review_form.dart';
 import 'package:intl/intl.dart';
 import 'package:fryo/shopping/models/recommended_item.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -26,7 +27,7 @@ class _ItemDetailState extends State<ItemDetail> {
           child: Column(
             children: [
               Container(
-                margin: const EdgeInsets.only(left: 18.0, top: 18.0, right: 18.0, bottom: 6.0),
+                margin: const EdgeInsets.only(left: 18.0, top: 18.0, right: 18.0, bottom: 12.0),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.green,
@@ -39,9 +40,10 @@ class _ItemDetailState extends State<ItemDetail> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(left: 6.0, top: 6.0, right: 6.0, bottom: 18.0),
-                padding: const EdgeInsets.all(6.0),
+                margin: const EdgeInsets.only(left: 12.0, top: 6.0, right: 12.0, bottom: 18.0),
+                padding: const EdgeInsets.only(left: 6.0, top: 18.0, right: 6.0, bottom: 18.0),
                 decoration: BoxDecoration(
+                  color: const Color.fromRGBO(76, 175, 80, 0.1),
                   border: Border.all(
                     color: Colors.green,
                     width: 2,
@@ -52,16 +54,16 @@ class _ItemDetailState extends State<ItemDetail> {
                   children: [
                     Text(
                       widget.item.fields.name,
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Colors.green.shade900, fontSize: 20, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 8.0),
+                    const SizedBox(height: 6.0),
                     Text(
                       "Rp${priceFormat.format(widget.item.fields.price).replaceAll(",", ".")}",
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Colors.green.shade900, fontSize: 18, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 8.0),
+                    const SizedBox(height: 12.0),
                     Text(
                       widget.item.fields.description,
                       style: const TextStyle(fontSize: 16),
@@ -76,15 +78,29 @@ class _ItemDetailState extends State<ItemDetail> {
       bottomNavigationBar: BottomAppBar(
         child: Padding(
           padding: const EdgeInsets.all(8),
-          child: ElevatedButton(
-            onPressed: () async {
-              Uri url = Uri.parse(widget.item.fields.link);
-              if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-                throw 'Could not launch $url';
-              }
-            },
-            child: const Text("🏬 Go to Store Page")
-          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  Uri url = Uri.parse(widget.item.fields.link);
+                  if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+                    throw 'Could not launch $url';
+                  }
+                },
+                child: const Text("🏬 Go to Store Page")
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ReviewForm(item: widget.item)),
+                  );
+                },
+                child: const Text("📝 Leave a Review")
+              ),
+            ],
+          )
         )
       )
     );

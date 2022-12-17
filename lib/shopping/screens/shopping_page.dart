@@ -26,8 +26,16 @@ class _ShoppingPageState extends State<ShoppingPage> {
           child: Column(
             children: [
               const SizedBox(height: 8),
+              const Divider(
+                height: 20,
+                thickness: 5,
+                indent: 8,
+                endIndent: 8,
+                color: Colors.green,
+              ),
+              const SizedBox(height: 8),
               const Text(
-                "Items",
+                "Featured Items",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
@@ -40,6 +48,8 @@ class _ShoppingPageState extends State<ShoppingPage> {
                     return ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) => Card(
+                        margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
+                        color: const Color.fromARGB(255, 207, 223, 208),
                         shape: RoundedRectangleBorder(
                           side: const BorderSide(
                             color: Colors.green,
@@ -71,7 +81,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                                 ),
                                 subtitle: Text(
                                   "Rp${priceFormat.format(snapshot.data![index].fields.price).replaceAll(",", ".")}",
-                                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  style: TextStyle(color: Colors.green.shade900, fontSize: 18, fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -92,8 +102,16 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 },
               ),
               const SizedBox(height: 8),
+              const Divider(
+                height: 20,
+                thickness: 5,
+                indent: 8,
+                endIndent: 8,
+                color: Colors.green,
+              ),
+              const SizedBox(height: 8),
               const Text(
-                "Vendors",
+                "Featured Vendors",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
@@ -106,6 +124,8 @@ class _ShoppingPageState extends State<ShoppingPage> {
                     return ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) => Card(
+                        margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
+                        color: const Color.fromARGB(255, 207, 223, 208),
                         shape: RoundedRectangleBorder(
                           side: const BorderSide(
                             color: Colors.green,
@@ -137,7 +157,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                               ListTile(
                                 title: Text(
                                   snapshot.data![index].fields.name,
-                                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold,),
+                                  style: TextStyle(color: Colors.green.shade900, fontSize: 24, fontWeight: FontWeight.bold,),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
