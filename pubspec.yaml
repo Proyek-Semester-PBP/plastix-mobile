@@ -32,6 +32,8 @@ dependencies:
   intl: ^0.17.0
   url_launcher: ^6.1.7
   js: ^0.6.2
+  validators: ^3.0.0
+  email_validator: '^2.1.16'
 
 dev_dependencies:
   flutter_test:

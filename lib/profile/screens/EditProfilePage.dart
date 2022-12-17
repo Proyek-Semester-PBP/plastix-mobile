@@ -174,10 +174,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 },
               ),
               const SizedBox(height: 24),
-              Center(child: buildSaveButton()),
+              Row(children: [
+                buildSaveButton(),
+                const SizedBox(height: 24),
+                buildCancelButton()
+              ]),
             ],
           ),
         ));
+  }
+
+  Widget buildCancelButton() {
+    return ButtonWidget(
+        text: 'Cancel',
+        onClicked: () {
+          Navigator.pop(context);
+        });
   }
 
   Widget buildSaveButton() {
