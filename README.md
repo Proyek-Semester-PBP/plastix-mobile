@@ -42,6 +42,11 @@ Recycle Page - Devina
 ## Integrasi Web Service dengan Aplikasi Web
 Integrasi Web Service dilakukan dengan aplikasi web Django PlasTIX. Data dalam format JSON yang digunakan pada modul-modul seperti `news`, `shopping`, dan lainnya akan dikumpulkan menggunakan dependensi `http`. Data yang dikumpulkan akan dikonversi ke dalam bentuk model dalam bahasa Dart dan ditampilkan menggunakan widget `FutureBuilder`. Selain itu, package `pbp_django_auth` akan digunakan untuk mengimplementasikan autentikasi di aplikasi mobile.
 
+## Link Aplikasi
+[Github Release](https://github.com/Proyek-Semester-PBP/plastix-mobile/releases/tag/1.0.0%2B1)
+
+[App Center Release](https://install.appcenter.ms/orgs/Proyek-Semester-PBP/apps/PlastTIX)
+
 ### Perubahan Versi Terakhir
 * Memperbaiki autentikasi
 * Mengintegrasikan modul redeem dengan modul profile
