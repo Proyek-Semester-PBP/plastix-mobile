@@ -1,5 +1,7 @@
 [![Github Release](https://github.com/Proyek-Semester-PBP/plastix-mobile/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/Proyek-Semester-PBP/plastix-mobile/actions/workflows/release.yml)
 
+[![Build status](https://build.appcenter.ms/v0.1/apps/d147d271-ec6f-4e7c-aeb3-8953672cfc84/branches/main/badge)](https://appcenter.ms)
+
 # Proyek Akhir Semester
 
 ## Anggota 
