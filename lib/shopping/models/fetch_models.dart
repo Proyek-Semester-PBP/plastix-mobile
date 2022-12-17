@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:fryo/shopping/models/recommended_item.dart';
 import 'package:fryo/shopping/models/recommended_vendor.dart';
 import 'package:fryo/shopping/models/review.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 Future<List<RecommendedItem>> fetchRecommendedItem() async {
   Uri url = Uri.parse('https://proyek-semester-pbp.up.railway.app/shopping/json-item/');
@@ -22,6 +23,19 @@ Future<List<RecommendedItem>> fetchRecommendedItem() async {
   }
 
   return recommendedItem;
+}
+
+Future<List<RecommendedItem>> fetchBookmarks(CookieRequest request) async {
+  var response = await request.get(
+    "https://proyek-semester-pbp.up.railway.app/auth/show_bookmarks/"
+  );
+
+  List<RecommendedItem> bookmarks = [];
+  for (var bookmark in response) {
+    bookmarks.add(RecommendedItem.fromJson(bookmark));
+  }
+
+  return bookmarks;
 }
 
 Future<List<RecommendedVendor>> fetchRecommendedVendor() async {

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fryo/shopping/screens/review_form.dart';
 import 'package:intl/intl.dart';
 import 'package:fryo/shopping/models/recommended_item.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ItemDetail extends StatefulWidget {
@@ -16,8 +18,17 @@ class ItemDetail extends StatefulWidget {
 class _ItemDetailState extends State<ItemDetail> {
   NumberFormat priceFormat = NumberFormat("###,###");
 
+  void bookmarkItem(request) async {
+    await request.post(
+      "https://proyek-semester-pbp.up.railway.app/auth/bookmark/${widget.item.pk}",
+      {}
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final request = context.read<CookieRequest>();
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -88,16 +99,55 @@ class _ItemDetailState extends State<ItemDetail> {
                     throw 'Could not launch $url';
                   }
                 },
-                child: const Text("🏬 Go to Store Page")
+                child: const Text("🏬 Store Page")
               ),
               ElevatedButton(
-                onPressed: () async {
+                onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ReviewForm(item: widget.item)),
                   );
                 },
-                child: const Text("📝 Leave a Review")
+                child: const Text("📝 Review")
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  bookmarkItem(request);
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        elevation: 15,
+                        child: ListView(
+                          padding: const EdgeInsets.only(top: 20),
+                          shrinkWrap: true,
+                          children: <Widget>[
+                            const Center(
+                              child: Text(
+                                'Item bookmarked!',
+                                style: TextStyle(fontSize: 20),
+                              )
+                            ),
+                            const SizedBox(height: 6),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text(
+                                'Return',
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              )
+                            ), 
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: const Text("🔖 Bookmark")
               ),
             ],
           )

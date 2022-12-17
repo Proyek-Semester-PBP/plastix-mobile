@@ -1,4 +1,5 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fryo/shopping/screens/bookmarks.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:fryo/shopping/models/fetch_models.dart';
@@ -259,7 +260,18 @@ class _ShoppingPageState extends State<ShoppingPage> {
             ],
           ),
         )
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        heroTag: 'bookmarks',
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Bookmarks()),
+          );
+        },
+        tooltip: 'Bookmarks',
+        child: const Icon(Icons.bookmark),
+      ),
     );
   }
 }
