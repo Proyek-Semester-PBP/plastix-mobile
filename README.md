@@ -1,3 +1,5 @@
+[![Github Release](https://github.com/Proyek-Semester-PBP/plastix-mobile/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/Proyek-Semester-PBP/plastix-mobile/actions/workflows/release.yml)
+
 # Proyek Akhir Semester
 
 ## Anggota 
