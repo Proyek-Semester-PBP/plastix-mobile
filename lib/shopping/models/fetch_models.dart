@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:fryo/shopping/models/recommended_item.dart';
 import 'package:fryo/shopping/models/recommended_vendor.dart';
+import 'package:fryo/shopping/models/review.dart';
 
 Future<List<RecommendedItem>> fetchRecommendedItem() async {
   Uri url = Uri.parse('https://proyek-semester-pbp.up.railway.app/shopping/json-item/');
@@ -41,4 +42,24 @@ Future<List<RecommendedVendor>> fetchRecommendedVendor() async {
   }
 
   return recommendedVendor;
+}
+
+Future<List<Review>> fetchReview() async {
+  Uri url = Uri.parse('https://proyek-semester-pbp.up.railway.app/shopping/json-review/');
+  var response = await http.get(
+    url,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
+  );
+
+  var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+  List<Review> highlightedReview = [];
+  for (var review in data) {
+    highlightedReview.add(Review.fromJson(review));
+  }
+
+  return highlightedReview;
 }

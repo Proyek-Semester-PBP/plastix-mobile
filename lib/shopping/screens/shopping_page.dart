@@ -1,3 +1,4 @@
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:fryo/shopping/models/fetch_models.dart';
@@ -174,6 +175,83 @@ class _ShoppingPageState extends State<ShoppingPage> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                     );
+                  }
+                },
+              ),
+              const SizedBox(height: 8),
+              const Divider(
+                height: 20,
+                thickness: 5,
+                indent: 8,
+                endIndent: 8,
+                color: Colors.green,
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                "Highlighted Review",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              FutureBuilder(
+                future: fetchReview(),
+                builder: (context, snapshot) {
+                  if (snapshot.data == null) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return Card(
+                        margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
+                        color: const Color.fromARGB(255, 207, 223, 208),
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                            color: Colors.green,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 8),
+                              ListTile(
+                                title: Text(
+                                  snapshot.data![0].fields.item,
+                                  style: TextStyle(color: Colors.green.shade900, fontSize: 24, fontWeight: FontWeight.bold,),
+                                  textAlign: TextAlign.center,
+                                ),
+                                subtitle: Text(
+                                  "Reviewed by ${snapshot.data![0].fields.user}",
+                                  style: TextStyle(color: Colors.green.shade900, fontSize: 18,),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              const Divider(
+                                height: 20,
+                                thickness: 2,
+                                color: Colors.green,
+                              ),
+                              RatingBar.builder(
+                                initialRating: snapshot.data![0].fields.rating.toDouble(),
+                                minRating: 1,
+                                direction: Axis.horizontal,
+                                itemCount: 5,
+                                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                itemBuilder: (context, _) => const Icon(
+                                  Icons.star,
+                                  color: Colors.green,
+                                ),
+                                ignoreGestures: true,
+                                onRatingUpdate: (rating) {},
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                snapshot.data![0].fields.comment,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              const SizedBox(height: 8),
+                            ],
+                          ),
+                        ),
+                      );
                   }
                 },
               ),
