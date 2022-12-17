@@ -45,7 +45,7 @@ Integrasi Web Service dilakukan dengan aplikasi web Django PlasTIX. Data dalam f
 ## Link Aplikasi
 [Github Release](https://github.com/Proyek-Semester-PBP/plastix-mobile/releases/tag/1.0.0%2B1)
 
-[App Center Release](https://install.appcenter.ms/orgs/Proyek-Semester-PBP/apps/PlastTIX)
+[App Center Release](https://install.appcenter.ms/orgs/Proyek-Semester-PBP/apps/PlastTIX/distribution_groups/public)
 
 ### Perubahan Versi Terakhir
 * Memperbaiki autentikasi
