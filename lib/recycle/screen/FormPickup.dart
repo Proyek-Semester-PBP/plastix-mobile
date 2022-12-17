@@ -112,11 +112,6 @@ class _FormPickupState extends State<FormPickup> {
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String? value) {
-                                  setState(() {
-                                    _weight = int.parse(value!);
-                                  });
-                                },
                                 onSaved: (String? value) {
                                   setState(() {
                                     _weight = int.parse(value!);
@@ -344,11 +339,6 @@ class _FormPickupState extends State<FormPickup> {
                                                             FontWeight.bold,
                                                       ),
                                                     ),
-                                                    // Text(_location +
-                                                    //     " " +
-                                                    //     _description +
-                                                    //     " " +
-                                                    //     _date.toString())
                                                   ],
                                                 )),
                                                 SizedBox(height: 20),

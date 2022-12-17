@@ -27,19 +27,6 @@ class _FormDropoffState extends State<FormDropoff> {
   String _description = "";
   String _is_pickup = "false";
 
-  // void post_history(
-  //     request, name, weight, description, is_pickup, location) async {
-  //   await request.post(
-  //       "https://proyek-semester-pbp.up.railway.app/auth/add_history_flutter/",
-  //       {
-  //         "name": name,
-  //         "weight": weight,
-  //         "description": description,
-  //         "is_pickup": is_pickup,
-  //         "location": location,
-  //       });
-  // }
-
   @override
   Widget build(BuildContext context) {
     final request = context.read<CookieRequest>();
@@ -116,17 +103,11 @@ class _FormDropoffState extends State<FormDropoff> {
                                   top: 7, right: 30, left: 30, bottom: 7),
                               child: TextFormField(
                                 decoration: InputDecoration(
-                                  hintText:
-                                      "Enter the plastic weight in kilograms",
+                                  hintText: "Enter the plastic weight",
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
-                                onChanged: (String? value) {
-                                  setState(() {
-                                    _weight = int.parse(value!);
-                                  });
-                                },
                                 onSaved: (String? value) {
                                   setState(() {
                                     _weight = int.parse(value!);
@@ -328,15 +309,6 @@ class _FormDropoffState extends State<FormDropoff> {
                                                             FontWeight.bold,
                                                       ),
                                                     ),
-                                                    // Text(_name +
-                                                    //     " " +
-                                                    //     _weight.toString() +
-                                                    //     " " +
-                                                    //     _location +
-                                                    //     " " +
-                                                    //     _description +
-                                                    //     " " +
-                                                    //     _date.toString())
                                                   ],
                                                 )),
                                                 SizedBox(height: 20),
@@ -353,20 +325,26 @@ class _FormDropoffState extends State<FormDropoff> {
                                                             {
                                                           "weights": _weight
                                                               .toString(),
-                                                          "name": _name.toString(),
-                                                          "description": _description.toString(),
-                                                          "is_pickup": _is_pickup.toString(),
-                                                          "location": _location.toString(),
+                                                          "name":
+                                                              _name.toString(),
+                                                          "description":
+                                                              _description
+                                                                  .toString(),
+                                                          "is_pickup":
+                                                              _is_pickup
+                                                                  .toString(),
+                                                          "location": _location
+                                                              .toString(),
                                                         });
-                                          //           await request.post(
-                                          // 'https://proyek-semester-pbp.up.railway.app/auth/add_history_flutter/',
-                                          // {
-                                          //   "name": _name,
-                                          //   "weight": _weight.toString(),
-                                          //   "description": _description,
-                                          //   "is_pickup": _is_pickup,
-                                          //   "location": _location,
-                                          // });
+                                                    //           await request.post(
+                                                    // 'https://proyek-semester-pbp.up.railway.app/auth/add_history_flutter/',
+                                                    // {
+                                                    //   "name": _name,
+                                                    //   "weight": _weight.toString(),
+                                                    //   "description": _description,
+                                                    //   "is_pickup": _is_pickup,
+                                                    //   "location": _location,
+                                                    // });
                                                     Navigator.pop(context);
                                                     setState(() {
                                                       _name = "";

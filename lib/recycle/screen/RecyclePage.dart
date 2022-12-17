@@ -482,6 +482,14 @@ class _RecyclePageState extends State<RecyclePage> {
                   ]),
                 ),
               ),
+              Container(
+                margin: EdgeInsets.only(top: 30, bottom: 5),
+              ),
+              Text(
+                "Recycle History",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
               FutureBuilder(
                   future: fetchHistory(request),
                   builder: (context, AsyncSnapshot snapshot) {
@@ -492,7 +500,8 @@ class _RecyclePageState extends State<RecyclePage> {
                         return Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.all(30.0),
+                              margin: EdgeInsets.only(
+                                  bottom: 30.0, left: 30.0, right: 30),
                             ),
                             Text(
                               "No History",
@@ -506,7 +515,7 @@ class _RecyclePageState extends State<RecyclePage> {
                         return Container(
                           color: Colors.white,
                           padding: EdgeInsets.only(
-                              top: 50.0, left: 20, right: 20, bottom: 50),
+                              top: 10.0, left: 20, right: 20, bottom: 50),
                           child: Table(
                             border: TableBorder.all(
                                 color: Color.fromARGB(255, 157, 194, 148)),
@@ -553,33 +562,6 @@ class _RecyclePageState extends State<RecyclePage> {
                                       Text(history.fields.description,
                                           textAlign: TextAlign.center),
                                     ])
-
-                              // TableRow(
-                              //     decoration: BoxDecoration(
-                              //         color:
-                              //             Color.fromARGB(255, 205, 241, 197)),
-                              //     children: [
-                              //       Text('Name',
-                              //           style: TextStyle(
-                              //               fontWeight: FontWeight.bold),
-                              //           textAlign: TextAlign.center),
-                              //       Text('Date',
-                              //           style: TextStyle(
-                              //               fontWeight: FontWeight.bold),
-                              //           textAlign: TextAlign.center),
-                              //       Text('Location',
-                              //           style: TextStyle(
-                              //               fontWeight: FontWeight.bold),
-                              //           textAlign: TextAlign.center),
-                              //       Text('Weight',
-                              //           style: TextStyle(
-                              //               fontWeight: FontWeight.bold),
-                              //           textAlign: TextAlign.center),
-                              //       Text('Description',
-                              //           style: TextStyle(
-                              //               fontWeight: FontWeight.bold),
-                              //           textAlign: TextAlign.center),
-                              //     ]),
                             ],
                           ),
                         );
