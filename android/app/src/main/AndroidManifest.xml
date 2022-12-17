@@ -3,7 +3,7 @@
    <application
         android:label="PlasTIX"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_plastix">
         <activity
             android:name=".MainActivity"
             android:exported="true"

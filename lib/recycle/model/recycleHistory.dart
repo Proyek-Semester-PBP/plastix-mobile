@@ -33,7 +33,6 @@ class RecycleHistory {
 
 class Fields {
   Fields({
-    required this.user,
     required this.name,
     required this.date,
     required this.weight,
@@ -43,7 +42,6 @@ class Fields {
     required this.description,
   });
 
-  User user;
   String name;
   String date;
   int weight;
@@ -53,7 +51,6 @@ class Fields {
   String description;
 
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
-        user: json["user"],
         name: json["name"],
         date: json["date"],
         weight: json["weight"],
@@ -64,7 +61,6 @@ class Fields {
       );
 
   Map<String, dynamic> toJson() => {
-        "user": user,
         "name": name,
         "date": date,
         "weight": weight,
