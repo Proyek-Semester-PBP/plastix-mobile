@@ -45,4 +45,5 @@ Integrasi Web Service dilakukan dengan aplikasi web Django PlasTIX. Data dalam f
 * Mengintegrasikan modul redeem dengan modul profile
 * Mengintegrasikan modul recycle dengan modul profile
 * Menyamakan modul recycle dengan situs web
+* Menyamakan modul shopping dengan situs web
 * Merilis aplikasi pada Github dan App Center
