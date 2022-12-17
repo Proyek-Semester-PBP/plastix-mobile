@@ -29,20 +29,7 @@ class _FormPickupState extends State<FormPickup> {
   String _details = "";
   String _description = "";
   String _location = "";
-  bool _is_pickup = true;
-
-  void post_history(
-      request, name, weight, description, is_pickup, location) async {
-    await request.post(
-        "https://proyek-semester-pbp.up.railway.app/auth/add_history_flutter/",
-        {
-          "name": name,
-          "weight": weight,
-          "description": description,
-          "is_pickup": is_pickup,
-          "location": location,
-        });
-  }
+  String _is_pickup = "true";
 
   @override
   Widget build(BuildContext context) {
@@ -326,19 +313,7 @@ class _FormPickupState extends State<FormPickup> {
                                   if (_formKey.currentState!.validate()) {
                                     _formKey.currentState!.save();
                                     setState(() {
-                                      _location = _details +
-                                          ", " +
-                                          _subdistrict +
-                                          ", " +
-                                          _city +
-                                          ", " +
-                                          _region +
-                                          " - " +
-                                          _zipcode.toString();
-                                      // post_history(request, _name, _weight,
-                                      //     _description, _is_pickup, _location);
-                                      // Budget newBudget = Budget(_judul, _nominal, _jenis, tanggal);
-                                      // DataBudget.data.add(newBudget);
+                                      _location = "$_details, $_subdistrict, $_city, $_region - $_zipcode";
                                     });
                                     showDialog(
                                       context: context,
@@ -388,10 +363,12 @@ class _FormPickupState extends State<FormPickup> {
                                                         await request.post(
                                                             'https://proyek-semester-pbp.up.railway.app/auth/addpoints/',
                                                             {
-                                                          "weights":
-                                                              userProvider
-                                                                  .weight
-                                                                  .toString(),
+                                                          "weights": _weight
+                                                              .toString(),
+                                                          "name": _name.toString(),
+                                                          "description": _description.toString(),
+                                                          "is_pickup": _is_pickup.toString(),
+                                                          "location": _location.toString(),
                                                         });
                                                     Navigator.pop(context);
                                                     setState(() {

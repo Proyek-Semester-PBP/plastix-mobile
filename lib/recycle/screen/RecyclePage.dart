@@ -10,7 +10,7 @@ import 'package:fryo/src/screens/HomePage.dart';
 // import 'dart:js' as js;
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:fryo/src/utils/fetchHistory.dart';
+import 'package:fryo/recycle/utils/fetchHistory.dart';
 
 class RecyclePage extends StatefulWidget {
   // final String pageTitle;
@@ -85,14 +85,15 @@ class _RecyclePageState extends State<RecyclePage> {
         elevation: 0,
         backgroundColor: primaryColor,
         title:
-        Text('Recycle', style: logoWhiteStyle, textAlign: TextAlign.center),
+            Text('Recycle', style: logoWhiteStyle, textAlign: TextAlign.center),
         actions: <Widget>[
           IconButton(
             padding: EdgeInsets.only(),
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage(pageTitle: '')),
+                MaterialPageRoute(
+                    builder: (context) => HomePage(pageTitle: '')),
               );
             },
             iconSize: 21,
@@ -129,7 +130,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[0].name,
                       textAlign: TextAlign.center,
                       style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -164,7 +165,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[1].name,
                       textAlign: TextAlign.center,
                       style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -199,7 +200,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[2].name,
                       textAlign: TextAlign.center,
                       style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -234,7 +235,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[3].name,
                       textAlign: TextAlign.center,
                       style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -269,7 +270,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[4].name,
                       textAlign: TextAlign.center,
                       style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -304,7 +305,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[5].name,
                       textAlign: TextAlign.center,
                       style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -339,7 +340,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[6].name,
                       textAlign: TextAlign.center,
                       style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -374,7 +375,7 @@ class _RecyclePageState extends State<RecyclePage> {
                       locations[7].name,
                       textAlign: TextAlign.center,
                       style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: EdgeInsets.all(5.0),
@@ -407,24 +408,25 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     Align(
                         child: SizedBox(
-                          width: 370,
-                          height: 40,
-                          child: FloatingActionButton(
-                              heroTag: null,
-                              shape: (RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                              backgroundColor: Color(0xFF198754),
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => FormDropoff()),
-                                );
-                              },
-                              child: Text(
-                                "Click here when you're at our vending machine",
-                              )),
-                        )),
+                      width: 370,
+                      height: 40,
+                      child: FloatingActionButton(
+                          heroTag: null,
+                          shape: (RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                          backgroundColor: Color(0xFF198754),
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FormDropoff()),
+                            );
+                          },
+                          child: Text(
+                            "Click here when you're at our vending machine",
+                            textAlign: TextAlign.center,
+                          )),
+                    )),
                     Container(
                       margin: EdgeInsets.all(10.0),
                     ),
@@ -457,23 +459,23 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                     Align(
                         child: SizedBox(
-                          width: 70,
-                          height: 40,
-                          child: FloatingActionButton(
-                              shape: (RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                              backgroundColor: Color(0xFF198754),
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => FormPickup()),
-                                );
-                              },
-                              child: Text(
-                                "Pick Up",
-                              )),
-                        )),
+                      width: 70,
+                      height: 40,
+                      child: FloatingActionButton(
+                          shape: (RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                          backgroundColor: Color(0xFF198754),
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FormPickup()),
+                            );
+                          },
+                          child: Text(
+                            "Pick Up",
+                          )),
+                    )),
                     Container(
                       margin: EdgeInsets.all(10.0),
                     ),
@@ -512,7 +514,7 @@ class _RecyclePageState extends State<RecyclePage> {
                               TableRow(
                                   decoration: BoxDecoration(
                                       color:
-                                      Color.fromARGB(255, 205, 241, 197)),
+                                          Color.fromARGB(255, 205, 241, 197)),
                                   children: [
                                     Text('Name',
                                         style: TextStyle(
@@ -535,11 +537,10 @@ class _RecyclePageState extends State<RecyclePage> {
                                             fontWeight: FontWeight.bold),
                                         textAlign: TextAlign.center),
                                   ]),
-                              snapshot.data.map((history) {
-                                return TableRow(
-                                    decoration: BoxDecoration(
-                                        color:
-                                        Color.fromARGB(255, 205, 241, 197)),
+                              for (var history in snapshot.data)
+                                TableRow(
+                                    decoration:
+                                        BoxDecoration(color: Colors.white),
                                     children: [
                                       Text(history.fields.name,
                                           textAlign: TextAlign.center),
@@ -551,8 +552,8 @@ class _RecyclePageState extends State<RecyclePage> {
                                           textAlign: TextAlign.center),
                                       Text(history.fields.description,
                                           textAlign: TextAlign.center),
-                                    ]);
-                              }).toList(),
+                                    ])
+
                               // TableRow(
                               //     decoration: BoxDecoration(
                               //         color:

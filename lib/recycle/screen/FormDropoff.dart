@@ -25,20 +25,20 @@ class _FormDropoffState extends State<FormDropoff> {
   int _weight = 0;
   String _location = "";
   String _description = "";
-  bool _is_pickup = false;
+  String _is_pickup = "false";
 
-  void post_history(
-      request, name, weight, description, is_pickup, location) async {
-    await request.post(
-        "https://proyek-semester-pbp.up.railway.app/auth/add_history_flutter/",
-        {
-          "name": name,
-          "weight": weight,
-          "description": description,
-          "is_pickup": is_pickup,
-          "location": location,
-        });
-  }
+  // void post_history(
+  //     request, name, weight, description, is_pickup, location) async {
+  //   await request.post(
+  //       "https://proyek-semester-pbp.up.railway.app/auth/add_history_flutter/",
+  //       {
+  //         "name": name,
+  //         "weight": weight,
+  //         "description": description,
+  //         "is_pickup": is_pickup,
+  //         "location": location,
+  //       });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -298,11 +298,7 @@ class _FormDropoffState extends State<FormDropoff> {
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     _formKey.currentState!.save();
-                                    setState(() {
-                                      // _date = DateTime.now();
-                                      // post_history(request, _name, _weight,
-                                      //     _description, _is_pickup, _location);
-                                    });
+                                    // setState();
                                     showDialog(
                                       context: context,
                                       builder: (context) {
@@ -357,7 +353,20 @@ class _FormDropoffState extends State<FormDropoff> {
                                                             {
                                                           "weights": _weight
                                                               .toString(),
+                                                          "name": _name.toString(),
+                                                          "description": _description.toString(),
+                                                          "is_pickup": _is_pickup.toString(),
+                                                          "location": _location.toString(),
                                                         });
+                                          //           await request.post(
+                                          // 'https://proyek-semester-pbp.up.railway.app/auth/add_history_flutter/',
+                                          // {
+                                          //   "name": _name,
+                                          //   "weight": _weight.toString(),
+                                          //   "description": _description,
+                                          //   "is_pickup": _is_pickup,
+                                          //   "location": _location,
+                                          // });
                                                     Navigator.pop(context);
                                                     setState(() {
                                                       _name = "";
